@@ -4,7 +4,6 @@
 */
 import React from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
-
 import styles from './footer.module.scss'
 
 const Footer = () => {
