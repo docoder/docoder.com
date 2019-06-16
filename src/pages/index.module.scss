@@ -1,0 +1,67 @@
+/*
+* @Author: docoder
+* @Email:  docoder@163.com
+*/
+.container {
+    background: #292C3F;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+.content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+.itemContainer {
+    list-style-type: none;
+    margin: 0;
+    background: #212433;
+    padding-bottom: 1px;
+}
+.blank {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    color: #212433;
+    font-weight: bold;
+}
+.itemHighlight {
+    background: #212433;
+}
+.itemNormal {
+    background: #292C3F;
+}
+.item {
+    margin-bottom: 0px;
+    margin-top: 1px;
+    a {
+        color: #ffffff;
+        display: flex;
+        padding: 2rem;
+        text-decoration: none;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 2rem;
+    }
+
+    a:hover {
+        background: #3B405D;
+    }
+    a:focus {
+        background: #212433;
+    }
+
+    h2 {
+        margin-bottom: 0;
+    }
+
+    p {
+        color: #959CCE;
+        font-size: 1rem;
+        font-style: italic;
+    }
+}

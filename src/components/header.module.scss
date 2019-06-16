@@ -1,0 +1,51 @@
+/*
+* @Author: docoder
+* @Email:  docoder@163.com
+*/
+.header {
+    height: 6rem;
+    background: #14161E;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.brand {
+    color: #00ff00;
+    font-size: 2rem;
+    height: 6rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-left: 2rem;
+    width: 8rem;
+}
+.input {
+    color: #00ff00;
+    font-size: 2rem;
+}
+.blink {
+    content:'';
+    display: block;
+    width: 1rem;
+    height: 2rem;
+    background: white;
+    animation: blink 1s infinite steps(1, start)
+}
+.noblink {
+    content:'';
+    display: block;
+    width: 1rem;
+    height: 2rem;
+    background: white;
+}
+@keyframes blink {
+    0%{
+        background-color: white;
+    }
+    50% {
+        background-color: #14161E;
+    }
+    100% {
+        background-color: white;
+    }
+}

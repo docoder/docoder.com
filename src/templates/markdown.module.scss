@@ -1,0 +1,41 @@
+/*
+* @Author: docoder
+* @Email:  docoder@163.com
+*/
+.container {
+    background: #292C3F;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+.content {
+    flex-grow: 1;
+}
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem;
+    background: #212433;
+    margin-top: 1px;
+    h2 {
+        margin: 0;
+        color: #ffffff;
+    }
+    p {
+        color: #959CCE;
+        font-size: 1rem;
+        font-style: italic;
+        margin: 0;
+    }
+}
+.markdown {
+    padding: 2rem;
+    background: #292C3F;
+    color: #ffffff;
+    a {
+        color: #BBE085;
+    }
+}
+

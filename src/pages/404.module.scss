@@ -1,0 +1,23 @@
+/*
+* @Author: docoder
+* @Email:  docoder@163.com
+*/
+.container {
+    background: #14161E;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 100vh;
+}
+.status {
+    background: red;
+    color: #14161E;
+    padding: 0.2rem 1.6rem;
+    font-size: 2rem;
+}
+.info {
+    color: red;
+    font-size: 2rem;
+    margin-left: 1.6rem;
+}
