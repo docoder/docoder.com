@@ -16,7 +16,7 @@ const Head = ({ title }) => {
     return (
         <Helmet>
             <title>{`${title} | ${data.site.siteMetadata.title}`}</title>
-            <link rel="stylesheet" href="../styles/hack.css" />
+            <link rel='stylesheet' href='//cdn.jsdelivr.net/npm/hack-font@3.3.0/build/web/hack.css' />
         </Helmet>
     )
 }
