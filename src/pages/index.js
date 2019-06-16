@@ -32,7 +32,7 @@ export default () => {
         <div className={styles.container}>
             <Head title="Home" />
             <div className={styles.content}>
-                <Header handleKeys={['alphanumeric', 'backspace', 'enter', '.']} onInput={(key) => {
+                <Header handleKeys={['alphanumeric', 'backspace', 'enter', '.', '/']} onInput={(key) => {
                     if (key.endsWith('>>') && items.length > 0) {
                         const item = items[0]
                         navigate(`/markdown/${item.node.fields.slug}`)

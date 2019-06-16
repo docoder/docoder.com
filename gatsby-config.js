@@ -8,6 +8,7 @@ module.exports = {
     siteMetadata: {
         title: 'docoder',
         author: 'docoder',
+        email: 'docoder@163.com',
         description: 'Just do it, coder!'
     },
     plugins: [

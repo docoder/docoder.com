@@ -1,0 +1,39 @@
+/*
+* @Author: docoder
+* @Email:  docoder@163.com
+*/
+.container {
+    background: #14161E;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 100vh;
+    flex-direction: column;
+    div {
+        width: 600px;
+        margin-bottom: 2rem;
+    }
+}
+.author {
+    background: blue;
+    color: #14161E;
+    padding: 0.2rem 1.6rem;
+    font-size: 2rem;
+}
+.authorInfo {
+    color: blue;
+    font-size: 2rem;
+    margin-left: 1.6rem;
+}
+.email {
+    background: yellow;
+    color: #14161E;
+    padding: 0.2rem 1.6rem;
+    font-size: 2rem;
+}
+.emailInfo {
+    color: yellow;
+    font-size: 2rem;
+    margin-left: 1.6rem;
+}

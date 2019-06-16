@@ -3,6 +3,7 @@
 * @Email:  docoder@163.com
 */
 import React from "react"
+import { navigate } from 'gatsby'
 import styles from './header.module.scss'
 import { findMatchedKey } from '../utils/keyEvents';
 import isURL from '../utils/isURL';
@@ -28,7 +29,9 @@ export default ({ handleKeys, onInput }) => {
             result = key.slice(0, key.length - 1)
             setKey(result)
         }else if( k === 'enter') {
-            if (isURL(key)) {
+            if (key.startsWith('/')) {
+                navigate(key)
+            }else if (isURL(key)) {
                 setKey('')
                 result=''
                 window.open('http://' + key, '_blank')
