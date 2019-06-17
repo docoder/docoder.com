@@ -44,7 +44,8 @@ module.exports = {
                         resolve: 'gatsby-remark-images',
                         options: {
                             maxWidth: 750,
-                            linkImagesToOriginal: false
+                            linkImagesToOriginal: false,
+                            wrapperStyle: fluidResult => `margin-left: 0; margin-right: 0;`
                         }
                     }
                 ]
