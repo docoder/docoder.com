@@ -56,11 +56,16 @@
 
     h2 {
         margin-bottom: 0;
+        overflow: hidden;
+        text-overflow:ellipsis;
+        white-space: nowrap;
     }
 
     p {
         color: #959CCE;
         font-size: 1rem;
         font-style: italic;
+        min-width: 6.1rem;
+        margin-left: 2rem;
     }
 }
