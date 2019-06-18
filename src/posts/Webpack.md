@@ -20,6 +20,7 @@ date: "2019-06-12"
     },
     plugins:[], // webpack 插件
     module: {		// 模块
+      noParse: /jquery/, // 不去解析 jquery 中的依赖库
       rules: [] // 规则
     },
     ...
@@ -117,6 +118,75 @@ date: "2019-06-12"
       ignored:/node_modules/ // 不需要监控的文件
     },
     ...
+  }
+```
+
+
+
+### optimization
+
+```js
+	...
+  const path = require('path');
+  module.exports = {
+    ...
+    optimization:{ 
+      //CommonsChunkPlugin 被移除,
+      //取而代之的是 optimization.splitChunks 和 optimization.runtimeChunk 配置项
+    	splitChunks:{ 	//分离打包成 Chunk
+      	cacheGroups:{  //缓存组
+          common:{ 	//将初始化加载时被重复引用的模块进行拆分
+            //显示块的范围，有三个可选值：initial(初始块)、async(按需加载块)、all(全部块)
+            chunks:'initial', 
+            minSize: 30 * 1024, //在压缩前的最小模块大小, 默认为0, 大于等于此文件大小的文件会被打包
+            minChunks:2, //最少引用次数, 默认为1, 大于等于此引用次数的文件会被分离打包
+            name: true //表示根据模块和缓存组秘钥自动生成
+          },
+          vendor:{
+            //缓存的优先级, 先处理 vendor, 再处理 common, 这样 /node_modules/ 不会被 common 处理
+            priority: 1,
+            test: /node_modules/, // 
+            chunks: 'initial',
+            minSize: 30 * 1024,
+            minChunks: 2
+          }
+      	}
+    	}
+  	},
+    ...
+  }
+```
+
+#####splitChunks 默认配置, 
+
+在默认情况下, SplitChunksPlugin 仅仅影响按需加载的代码块, 因为更改初始块会影响 HTML 文件应包含的脚本标记以运行项目
+
+webpack将根据以下条件自动拆分代码块：
+
+- 会被共享的代码块或者 node_mudules 文件夹中的代码块
+- 体积大于30KB的代码块（在gz压缩前）
+- 按需加载代码块时的并行请求数量不超过5个
+- 加载初始页面时的并行请求数量不超过3个
+
+```js
+  splitChunks: {
+    chunks: "async",
+    minSize: 30000,
+    minChunks: 1,
+    maxAsyncRequests: 5,
+    maxInitialRequests: 3,
+    name: true,
+    cacheGroups: {
+      default: {
+        minChunks: 2,
+        priority: -20
+        reuseExistingChunk: true,
+      },
+      vendors: {
+        test: /[\\/]node_modules[\\/]/,
+        priority: -10
+      }
+    }
   }
 ```
 
@@ -235,7 +305,7 @@ date: "2019-06-12"
   }
 ```
 
-### webpack.ProvidePlugin
+### webpack.ProvidePlugin, webpack.IgnorePlugin
 
 ```js
   ...
@@ -246,6 +316,8 @@ date: "2019-06-12"
       new webpack.ProvidePlugin({ // 在每个模块中都注入$
          $:'jquery'
       }),
+      // 不打包 moment 包里的 locale 文件夹文件
+      new webpack.IgnorePlugin(/\.\/locale/, /moment/), 
       ...
     ],
     ...
@@ -273,6 +345,37 @@ date: "2019-06-12"
       ...
     ],
     ...
+  }
+```
+
+
+
+### webpack.DefinePlugin
+
+定义全局变量
+
+```js
+	...
+  module.exports = {
+    ...
+    plugins:[
+      ...
+      new webpack.DefinePlugin({
+        ENV: JSON.stringify('production'), //等价于 '"production"', 会解析出字符串里的值，为字符串
+        FLAG: 'true' //解析为 boolean: true
+      }),
+      ...
+    ],
+    ...
+  }
+```
+
+```js
+  let url = '';
+  if(ENV ==='dev'){
+    url = 'http://localhost:3000'
+  }else{
+    url = 'https://docoder.com'
   }
 ```
 
@@ -454,7 +557,7 @@ date: "2019-06-12"
   let image = new Image();
   image.src = logo; // logo 其实就是一个新的图片地址字符串
   document.body.appendChild(image);
-  ```
+```
 
   ```js
   ...
@@ -472,7 +575,7 @@ date: "2019-06-12"
     },
     ...
   }
-```
+  ```
 
 
 
