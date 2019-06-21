@@ -67,6 +67,7 @@ date: "2019-06-12"
       contentBase: './build',
       compress: true,	//压缩
       open: true,	//自动打开浏览器
+      historyApiFallback: true, // redirect 404s to /index.html
       proxy:{ // 代理配置, 把请求代理到其他服务器上
         '/api':{
           target:'http://localhost:3000',
@@ -157,7 +158,7 @@ date: "2019-06-12"
   }
 ```
 
-#####splitChunks 默认配置, 
+####splitChunks 默认配置
 
 在默认情况下, SplitChunksPlugin 仅仅影响按需加载的代码块, 因为更改初始块会影响 HTML 文件应包含的脚本标记以运行项目
 
