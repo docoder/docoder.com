@@ -17,6 +17,7 @@ export const query = graphql`
         date
       }
       html
+      tableOfContents
     }
   }
 `
@@ -33,7 +34,10 @@ const Markdown = (props) => {
                     <h2>{props.data.markdownRemark.frontmatter.title}</h2>
                     <p>{props.data.markdownRemark.frontmatter.date}</p>
                 </div>
-                <div className={styles.markdown} dangerouslySetInnerHTML={{ __html: props.data.markdownRemark.html }}></div>
+                <div className={styles.markdownContainer}>
+                    <div className={styles.markdown} dangerouslySetInnerHTML={{ __html: props.data.markdownRemark.html }}></div>
+                    <div className={styles.toc} dangerouslySetInnerHTML={{ __html: props.data.markdownRemark.tableOfContents }}></div>
+                </div>
             </div>
             <Footer />
         </div>

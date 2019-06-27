@@ -2,8 +2,9 @@
 * @Author: docoder
 * @Email:  docoder@163.com
 */
+@import "../styles/colors.scss";
 .container {
-    background: #14161E;
+    background: $black;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -11,13 +12,13 @@
     min-height: 100vh;
 }
 .status {
-    background: red;
-    color: #14161E;
+    background: $red;
+    color: $black;
     padding: 0.2rem 1.6rem;
     font-size: 2rem;
 }
 .info {
-    color: red;
+    color: $red;
     font-size: 2rem;
     margin-left: 1.6rem;
 }

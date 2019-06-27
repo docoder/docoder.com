@@ -2,8 +2,9 @@
 * @Author: docoder
 * @Email:  docoder@163.com
 */
+@import "../styles/colors.scss";
 .container {
-    background: #14161E;
+    background: $black;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -16,24 +17,24 @@
     }
 }
 .author {
-    background: blue;
-    color: #14161E;
+    background: $blue;
+    color: $black;
     padding: 0.2rem 1.6rem;
     font-size: 2rem;
 }
 .authorInfo {
-    color: blue;
+    color: $blue;
     font-size: 2rem;
     margin-left: 1.6rem;
 }
 .email {
-    background: yellow;
-    color: #14161E;
+    background: $yellow;
+    color: $black;
     padding: 0.2rem 1.6rem;
     font-size: 2rem;
 }
 .emailInfo {
-    color: yellow;
+    color: $yellow;
     font-size: 2rem;
     margin-left: 1.6rem;
 }

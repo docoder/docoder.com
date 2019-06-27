@@ -2,6 +2,7 @@
 * @Author: docoder
 * @Email:  docoder@163.com
 */
+@import "../styles/colors.scss";
 .container {
     display: flex;
     flex-direction: column;
@@ -15,7 +16,7 @@
 .itemContainer {
     list-style-type: none;
     margin: 0;
-    background: #212433;
+    background: $selected;
     padding-bottom: 1px;
 }
 .blank {
@@ -24,20 +25,20 @@
     justify-content: center;
     align-items: center;
     font-size: 2rem;
-    color: #212433;
+    color: $selected;
     font-weight: bold;
 }
 .itemHighlight {
-    background: #212433;
+    background: $selected;
 }
 .itemNormal {
-    background: #292C3F;
+    background: $normal;
 }
 .item {
     margin-bottom: 0px;
     margin-top: 1px;
     a {
-        color: #ffffff;
+        color: $white;
         display: flex;
         padding: 2rem;
         text-decoration: none;
@@ -48,10 +49,10 @@
     }
 
     a:hover {
-        background: #3B405D;
+        background: $highlight;
     }
     a:focus {
-        background: #212433;
+        background: $selected;
     }
 
     h2 {
@@ -62,7 +63,7 @@
     }
 
     p {
-        color: #959CCE;
+        color: $detail;
         font-size: 1rem;
         font-style: italic;
         min-width: 6.1rem;

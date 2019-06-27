@@ -2,13 +2,15 @@
 * @Author: docoder
 * @Email:  docoder@163.com
 */
+@import "../styles/colors.scss";
+
 .footer {
     margin-top: 1rem;
-    color: #959CCE;
+    color: $detail;
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #14161E;
+    background: $black;
     padding-top: 0.5rem;
     p {
         margin-bottom: 0.5rem;

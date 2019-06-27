@@ -2,15 +2,17 @@
 * @Author: docoder
 * @Email:  docoder@163.com
 */
+@import "../styles/colors.scss";
+
 .header {
     height: 6rem;
-    background: #14161E;
+    background: $black;
     display: flex;
     flex-direction: row;
     align-items: center;
 }
 .brand {
-    color: #00ff00;
+    color: $green;
     font-size: 2rem;
     height: 6rem;
     display: flex;
@@ -20,7 +22,7 @@
     width: 8rem;
 }
 .input {
-    color: #00ff00;
+    color: $green;
     font-size: 2rem;
 }
 .blink {
@@ -43,7 +45,7 @@
         background-color: white;
     }
     50% {
-        background-color: #14161E;
+        background-color: $black;
     }
     100% {
         background-color: white;

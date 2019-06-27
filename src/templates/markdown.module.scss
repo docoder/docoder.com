@@ -2,6 +2,7 @@
 * @Author: docoder
 * @Email:  docoder@163.com
 */
+@import "../styles/colors.scss";
 .container {
     display: flex;
     flex-direction: column;
@@ -16,25 +17,80 @@
     justify-content: space-between;
     align-items: center;
     padding: 2rem;
-    background: #212433;
+    background: $selected;
     margin-top: 1px;
     h2 {
         margin: 0;
-        color: #ffffff;
+        color: $white;
     }
     p {
-        color: #959CCE;
+        color: $detail;
         font-size: 1rem;
         font-style: italic;
         margin: 0;
     }
 }
+.markdownContainer {
+    display: flex;
+    flex-direction: row;
+}
 .markdown {
     padding: 2rem;
-    background: #292C3F;
-    color: #ffffff;
+    background: $normal;
+    color: $white;
     a {
-        color: #BBE085;
+        color: $link;
+    }
+    width: calc(100% - 14rem);
+    @media (max-width: 768px) {
+        width: 100%;
     }
 }
+.toc {
+    border-left: 1px solid $selected;
+    background: $normal;
+    width: 14rem;
+    font-size: 0.7rem;
+    padding-top: 2rem;
+    padding-right: 1rem;
+    ul {
+        list-style-type: none;
+        color: $detail;
+        border-left: 2px dashed $selected;
+        margin-left: 1rem;
+    }
+    ul:first-child {
+        border: 0px;
+        margin-left: 0rem;
+    }
+    li {
+        margin-bottom: 0.1rem;
+        color: $detail;
+    }
+    li > ul {
+        margin-top: 0.1rem;
+    }
+    li > p {
+        margin-bottom: 0;
+    }
+    li > a {
+        margin-left: 1rem;
+    }
+    a {
+        color: $detail;
+        text-decoration: none;
+        line-height: 1.2;
+        display: block;
+        padding-bottom: 8px;
+        padding-top: 6px;
+        margin-left: 0.9rem;
+    }
+    a:hover {
+        color: $link;
+    }
+    @media (max-width: 768px) {
+        display: none;
+    }
+}
+
 
