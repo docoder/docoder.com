@@ -25,10 +25,12 @@ export default ({ handleKeys, onInput }) => {
             ref.current = null
         }, 1000)
         let result = key
-        if ( k === 'backspace' ) {
+        switch (k) {
+            case 'backspace': 
             result = key.slice(0, key.length - 1)
             setKey(result)
-        }else if( k === 'enter') {
+            break;
+            case 'enter':
             if (key.startsWith('/')) {
                 navigate(key+'/')
             }else if (isURL(key)) {
@@ -38,9 +40,17 @@ export default ({ handleKeys, onInput }) => {
             }else {
                 result += '>>'
             }
-        }else{
+            break;
+            case 'up':
+            result += '^'
+            break;
+            case 'down':
+            result += '*'
+            break;
+            default:
             result = key + k
             setKey(result)
+            break;
         }
         if (onInput) onInput(result)
     }, [onInput])

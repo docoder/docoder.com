@@ -29,6 +29,9 @@ date: "2019-06-27"
 
 - 与 public 相同
 - 但能被其他 module 里的代码 override
+  - class 继承
+  - method 重写
+  - property 重写
 
 ```swift
 protocol Account { 
@@ -40,8 +43,9 @@ protocol Account {
 
 typealias Dollars = Double
 /// A U.S. Dollar based "basic" account. 
-class BasicAccount: Account {
+open class BasicAccount: Account {
 	private(set) var balance: Dollars = 0.0 // private set, 外部不可修改
+  public init() { }
 	func deposit(amount: Dollars) { 
     balance += amount 
   }
@@ -54,7 +58,7 @@ class BasicAccount: Account {
   }
 }
 
-class CheckingAccount: BasicAccount { 
+public class CheckingAccount: BasicAccount { 
   private let accountNumber = UUID().uuidString // private, 外部不可读取或修改
 	class Check {
 		let account: String 
@@ -63,7 +67,7 @@ class CheckingAccount: BasicAccount {
 		func cash() { 
       cashed = true 
     }
-		init(amount: Dollars, from account: CheckingAccount) { 
+		fileprivate init(amount: Dollars, from account: CheckingAccount) {  //fileprivate, 相同文件内可访问
       self.amount = amount 
       self.account = account.accountNumber 
     }
@@ -95,5 +99,14 @@ janeChecking.balance // Jane 账户现在有 200
  
 janeChecking.deposit(check) // 支票已作废不能再存
 janeChecking.balance // Jane 账户现在还是有 200
+```
+
+```swift
+let johnChecking = CheckingAccount() // 因为 CheckingAccount 为 public
+johnChecking.deposit(amount: 300.00)
+
+class SavingsAccount: BasicAccount { // 因为 BasicAccount 为 open
+  var interestRate: Double = 0.0
+}
 ```
 
