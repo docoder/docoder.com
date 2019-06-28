@@ -249,6 +249,153 @@ precedencegroup ExponentiationPrecedence {
 }
 infix operator **: ExponentiationPrecedence
 
-2 * 2 ** 3 ** 2 
+2 * 2 ** 3 ** 2 // 可以正常编译运行了
+```
+
+## Subscripts
+
+```swift
+subscript(parameterList) -> ReturnType { // 不能用 inout 或 默认参数
+  get { 
+    // return someValue of ReturnType 
+  }
+	set(newValue) { // 可选, newValue 的类型为 ReturnType
+    // set someValue of ReturnType to newValue 
+  }
+}
+```
+
+```swift
+class Person {
+	let name: String 
+  let age: Int
+	init(name: String, age: Int) { 
+    self.name = name 
+    self.age = age 
+  }
+}
+let me = Person(name: "Cosmin", age: 32)
+
+extension Person {
+	subscript(key: String) -> String? { 
+    switch key { 
+      case "name":
+				return name
+      case "age":
+				return "\(age)"
+      default:
+      	return nil
+    }
+}
+me["name"] // Cosmin
+me["age"] // 32
+me["gender"] // nil
+```
+
+### Parameters
+
+```swift
+subscript(property key: String) -> String? { 
+  ...
+}
+me[property: "name"] 
+me[property: "age"] 
+me[property: "gender"]
+```
+
+###Dynamic member lookup
+
+- `@dynamicMemberLookup` 提供  `.` 语法
+- 不能表明意图，编译期无限制，不要滥用
+
+```swift
+@dynamicMemberLookup // 开启 Subscripts 点语法
+class Instrument {
+	let brand: String 
+  let year: Int 
+  private let details: [String: String]
+	init(brand: String, year: Int, details: [String: String]) { 
+    self.brand = brand 
+    self.year = year 
+    self.details = details 
+  }
+	subscript(dynamicMember key: String) -> String {  // 实现 subscript(dynamicMember:)
+    switch key { 
+      case "info":
+      	return "\(brand) made in \(year)."
+			default:
+      	return details[key] ?? "" 
+    } 
+  }
+}
+
+let instrument = Instrument(brand: "Roland", year: 2018, details: ["type": "accoustic", "pitch": "C"]) 
+instrument.info // Roland made in 2018
+instrument.pitch // C
+instrument.abcd // "" // 运行时决定，编译时不报错
+
+instrument.brand // "Roland" 
+instrument.year // 2018
+
+class Guitar: Instrument {} // 继承父类，调用父类的 dynamic member lookup
+let guitar = Guitar(brand: "Fender", year: 2018, details: ["type": "electric", "pitch": "C"]) 
+guitar.info
+```
+
+## Keypaths
+
+- 存储属性的引用
+- 可以存储需要一层一层深入访问的属性的引用
+- 可以 append
+- 优点
+  - 可以参数化属性，而不用硬编码
+  - 可以将 keypath 用变量存储，灵活
+
+```swift
+class Tutorial {
+	let title: String 
+  let author: Person 
+  let type: String 
+  let publishDate: Date
+	init(title: String, author: Person, type: String, publishDate: Date) { 
+    self.title = title 
+    self.author = author 
+    self.type = type 
+    self.publishDate = publishDate 
+  }
+}
+
+let tutorial = Tutorial(
+  title: "Object Oriented Programming in Swift", 
+  author: me, 
+  type: "Swift", 
+  publishDate: Date()
+)
+
+let title = \Tutorial.title // 为类 Tutorial 的 title 属性创建一个 keypath
+let tutorialTitle = tutorial[keyPath: title] // 访问 keypath 的值
+
+let authorName = \Tutorial.author.name // 需多层访问的属性
+var tutorialAuthor = tutorial[keyPath: authorName]
+
+let authorPath = \Tutorial.author 
+let authorNamePath = authorPath.appending(path: \.name) // append
+tutorialAuthor = tutorial[keyPath: authorNamePath]
+```
+
+### 设置属性
+
+```swift
+class Jukebox { 
+  var song: String
+  init(song: String) { 
+    self.song = song 
+  }
+}
+
+let jukebox = Jukebox(song: "Nothing else matters")
+
+let song = \Jukebox.song 
+jukebox[keyPath: song] = "Stairway to heaven"
 ```
 
