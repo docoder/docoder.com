@@ -46,18 +46,23 @@
         width: 100%;
     }
 }
-.toc {
-    border-left: 1px solid $selected;
+.tocContainer{
     background: $normal;
     width: 14rem;
+    border-left: 1px solid $selected;
+}
+.toc {
     font-size: 0.7rem;
     padding-top: 2rem;
     padding-right: 1rem;
+    overflow-y: auto;
+    height: 100%;
     ul {
         list-style-type: none;
         color: $detail;
-        border-left: 2px dashed $selected;
+        border-left: 1px dashed $detail;
         margin-left: 1rem;
+        margin-bottom: 0;
     }
     ul:first-child {
         border: 0px;

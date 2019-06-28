@@ -4,6 +4,7 @@
 */
 import React from 'react'
 import { graphql, navigate } from 'gatsby'
+import { StickyContainer, Sticky } from 'react-sticky';
 import styles from './markdown.module.scss'
 import Head from '../components/head'
 import Header from '../components/header'
@@ -34,10 +35,14 @@ const Markdown = (props) => {
                     <h2>{props.data.markdownRemark.frontmatter.title}</h2>
                     <p>{props.data.markdownRemark.frontmatter.date}</p>
                 </div>
-                <div className={styles.markdownContainer}>
+                <StickyContainer className={styles.markdownContainer}>
                     <div className={styles.markdown} dangerouslySetInnerHTML={{ __html: props.data.markdownRemark.html }}></div>
-                    <div className={styles.toc} dangerouslySetInnerHTML={{ __html: props.data.markdownRemark.tableOfContents }}></div>
-                </div>
+                        <div className={styles.tocContainer}>
+                            <Sticky>{({ style }) => (
+                                <div style={style} className={styles.toc} dangerouslySetInnerHTML={{ __html: props.data.markdownRemark.tableOfContents }}></div>
+                            )}</Sticky>
+                        </div>
+                </StickyContainer>
             </div>
             <Footer />
         </div>

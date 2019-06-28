@@ -680,7 +680,7 @@ class AnotherStudentAthlete: AnotherStudent {
 
 #### 引用计数
 
-**automatic reference counting (ARC) **
+**automatic reference counting (ARC)**
 
 Swift 编译器在编译期间会自动添加增减引用计数的方法调用
 
