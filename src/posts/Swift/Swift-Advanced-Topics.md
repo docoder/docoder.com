@@ -190,3 +190,65 @@ class SavingsAccount: BasicAccount {
 }
 ```
 
+## 自定义运算符
+
+- preﬁx, postﬁx,  inﬁx
+
+```swift
+infix operator **		// preﬁx, postﬁx, inﬁx
+func **(base: Int, power: Int) -> Int { 
+  precondition(power >= 2) 
+  var result = base 
+  for _ in 2...power { 
+    result *= base 
+  }
+  return result
+}
+
+let base = 2 
+let exponent = 2 
+let result = base ** exponent
+
+infix operator **=
+
+func **=(lhs: inout Int, rhs: Int) { 
+  lhs = lhs ** rhs 
+}
+var number = 2 
+number **= exponent
+```
+
+###Generic operators
+
+```swift
+func **<T: BinaryInteger>(base: T, power: Int) -> T { //使用泛型使之适用于所有 integer 类型
+  precondition(power >= 2) 
+  var result = base 
+  for _ in 2...power { 
+    result *= base 
+  } 
+  return result 
+}
+
+func **=<T: BinaryInteger>(lhs: inout T, rhs: Int) { 
+  lhs = lhs ** rhs 
+}
+```
+
+### 优先级和顺序
+
+**Precedence and associativity**
+
+```swift
+2 * 2 ** 3 ** 2 // Does not compile!
+2 * (2 ** (3 ** 2))
+
+precedencegroup ExponentiationPrecedence { 
+  associativity: right // 指定优先顺序
+  higherThan: MultiplicationPrecedence // 指定优先级高于乘法
+}
+infix operator **: ExponentiationPrecedence
+
+2 * 2 ** 3 ** 2 
+```
+

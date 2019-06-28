@@ -50,6 +50,13 @@ module.exports = {
                     }
                 ]
             }
+        },
+        {
+            resolve: 'gatsby-plugin-page-progress',
+            options: {
+                excludePaths: ['/', '/about/'],
+                color: '#00ff00',
+            }
         }
     ]
 }
