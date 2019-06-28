@@ -30,7 +30,7 @@ export default ({ handleKeys, onInput }) => {
             setKey(result)
         }else if( k === 'enter') {
             if (key.startsWith('/')) {
-                navigate(key)
+                navigate(key+'/')
             }else if (isURL(key)) {
                 setKey('')
                 result=''

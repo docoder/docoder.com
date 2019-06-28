@@ -35,7 +35,7 @@ export default () => {
                 <Header handleKeys={['alphanumeric', 'backspace', 'enter', '.', '/']} onInput={(key) => {
                     if (key.endsWith('>>') && items.length > 0) {
                         const item = items[0]
-                        navigate(`/${item.node.fields.slug}`)
+                        navigate(`/${item.node.fields.slug}/`)
                     }else {
                        const newItems = data.allMarkdownRemark.edges.filter(item => ~item.node.frontmatter.title.toLowerCase().indexOf(key.toLowerCase()))
                        setItems(newItems)
@@ -45,7 +45,7 @@ export default () => {
                     {items.map((edge, index) => {
                         return (
                             <li className={styles.item} key={edge.node.frontmatter.title}>
-                                <Link className={index === 0 ? styles.itemHighlight : styles.itemNormal}  to={`/${edge.node.fields.slug}`}>
+                                <Link className={index === 0 ? styles.itemHighlight : styles.itemNormal}  to={`/${edge.node.fields.slug}/`}>
                                     <h2>{edge.node.frontmatter.title}</h2>
                                     <p>{edge.node.frontmatter.date}</p>
                                 </Link>
