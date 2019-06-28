@@ -7,10 +7,10 @@
     background: $black;
     display: flex;
     justify-content: center;
-    align-items: center;
     width: 100%;
-    min-height: 100vh;
     flex-direction: column;
+    padding-left: 2rem;
+    padding-top: 3rem;
     div {
         width: 600px;
         margin-bottom: 2rem;
