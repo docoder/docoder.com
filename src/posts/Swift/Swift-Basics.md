@@ -1257,14 +1257,14 @@ let backwardsNameString = String(backwardsName) // 将创建一个新的字符�
 #### Substrings
 
 ```swift
-  let fullName = "Matt Naff" 
-  let spaceIndex = fullName.index(of: " ")!
+let fullName = "Matt Naff" 
+let spaceIndex = fullName.index(of: " ")!
 
-  let firstName = fullName[fullName.startIndex..<spaceIndex] // "Matt"
-  //等价于
-  let firstName = fullName[..<spaceIndex] // "Matt"
+let firstName = fullName[fullName.startIndex..<spaceIndex] // "Matt"
+//等价于
+let firstName = fullName[..<spaceIndex] // "Matt"
 
-  let lastName = fullName[fullName.index(after: spaceIndex)...] // "Naff"
-  // firstName, lastName 为 String.SubSequence (Substring 的别称) 类型, 而非 String 类型, Swift的优化，此时 firstName, lastName 与原来的字符串共享内存, 并不分配新内存, 节省了内存使用
-  let lastNameString = String(lastName) // 此时才会分配新内存 
+let lastName = fullName[fullName.index(after: spaceIndex)...] // "Naff"
+// firstName, lastName 为 String.SubSequence (Substring 的别称) 类型, 而非 String 类型, Swift的优化，此时 firstName, lastName 与原来的字符串共享内存, 并不分配新内存, 节省了内存使用
+let lastNameString = String(lastName) // 此时才会分配新内存 
 ```

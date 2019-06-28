@@ -8,33 +8,33 @@ date: "2019-06-26"
 **结构体是值类型, 而非引用类型。结构体无处不存在，许多Swift标准类型都是结构体，比如，Array, Int, Float, Double, Bool, Dictionary, Set 和 String都是被定义为结构体。所以它们所有自己的方法和属性。**
 
 ```swift
-  struct Location { 
-    let x: Int 
-    let y: Int 
-  }
-  let storeLocation = Location(x: 2, y: 4) // swift 自动提供的初始化函数，强制必须设置所有属性
+struct Location { 
+  let x: Int 
+  let y: Int 
+}
+let storeLocation = Location(x: 2, y: 4) // swift 自动提供的初始化函数，强制必须设置所有属性
 
-  struct DeliveryArea { 
-    let center: Location // let 不可修改
-    var radius: Double // var 可修改
-  }
-  var storeArea = DeliveryArea(center: storeLocation, radius: 4) // var 可以修改其可修改属性
+struct DeliveryArea { 
+  let center: Location // let 不可修改
+  var radius: Double // var 可修改
+}
+var storeArea = DeliveryArea(center: storeLocation, radius: 4) // var 可以修改其可修改属性
 
-  print(storeArea.radius) // 4.0
-  print(storeArea.center.x) // 2
-  storeArea.radius = 250
+print(storeArea.radius) // 4.0
+print(storeArea.center.x) // 2
+storeArea.radius = 250
 
-  let fixedArea = DeliveryArea(center: storeLocation, radius: 4) // let 结构体属性不可修改
-  fixedArea.radius = 250 // Error: Cannot assign to property 
+let fixedArea = DeliveryArea(center: storeLocation, radius: 4) // let 结构体属性不可修改
+fixedArea.radius = 250 // Error: Cannot assign to property 
 
-  // copy-on-assignment 结构体是值类型, 而非引用类型
-  var area1 = DeliveryArea(center: Location(x: 2, y: 4), radius: 2.5) 
-  var area2 = area1 
-  print(area1.radius) // 2.5 
-  print(area2.radius) // 2.5
-  area1.radius = 4 
-  print(area1.radius) // 4.0 
-  print(area2.radius) // 2.5
+// copy-on-assignment 结构体是值类型, 而非引用类型
+var area1 = DeliveryArea(center: Location(x: 2, y: 4), radius: 2.5) 
+var area2 = area1 
+print(area1.radius) // 2.5 
+print(area2.radius) // 2.5
+area1.radius = 4 
+print(area1.radius) // 4.0 
+print(area2.radius) // 2.5
 ```
 
 ### Properties
