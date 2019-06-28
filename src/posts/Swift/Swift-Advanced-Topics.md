@@ -44,9 +44,10 @@ protocol Account {
 typealias Dollars = Double
 /// A U.S. Dollar based "basic" account. 
 open class BasicAccount: Account {
-	private(set) var balance: Dollars = 0.0 // private set, 外部不可修改
+	// private(set) var balance: Dollars = 0.0 // private set, 外部不可修改
+  public var balance: Dollars = 0.0
   public init() { }
-	func deposit(amount: Dollars) { 
+	public func deposit(amount: Dollars) { 
     balance += amount 
   }
 	func withdraw(amount: Dollars) { 
@@ -103,10 +104,89 @@ janeChecking.balance // Jane 账户现在还是有 200
 
 ```swift
 let johnChecking = CheckingAccount() // 因为 CheckingAccount 为 public
-johnChecking.deposit(amount: 300.00)
 
 class SavingsAccount: BasicAccount { // 因为 BasicAccount 为 open
-  var interestRate: Double = 0.0
+  var interestRate: Double
+  init(interestRate: Double) { 
+    self.interestRate = interestRate
+  }
+  func processInterest() { 
+    let interest = balance * interestRate
+    deposit(amount: interest)
+	}
+}
+```
+
+## 用扩展组织代码
+
+###By behavior
+
+```swift
+public class CheckingAccount: BasicAccount { 
+	private var issuedChecks: [Int] = [] 
+  private var currentCheck = 1
+}
+
+private extension CheckingAccount { // private 使扩展中方法仅能被 CheckingAccount 使用，外部不能使用
+	func inspectForFraud(with checkNumber: Int) -> Bool { 
+    return issuedChecks.contains(checkNumber) 
+  }
+  func nextNumber() -> Int { 
+    let next = currentCheck 
+    currentCheck += 1 
+    return next 
+  }
+}
+```
+
+###By protocol conformance
+
+```swift
+extension CheckingAccount: CustomStringConvertible { 
+  public var description: String { 
+    return "Checking Balance: $\(balance)" 
+  } 
+}
+```
+
+###available()
+
+**old**
+
+```swift
+class SavingsAccount: BasicAccount {
+  var interestRate: Double
+  
+  //第一个参数 "*" 表示影响哪些平台 (*, iOS, iOSMac, tvOS or watchOS)
+  @available(*, deprecated, message: "Use init(interestRate:pin:) instead")
+  init(interestRate: Double) { 
+    self.interestRate = interestRate
+  }
+  
+  @available(*, deprecated, message: "Use processInterest(pin:) instead")
+  func processInterest() { 
+    let interest = balance * interestRate
+    deposit(amount: interest)
+	}
+}
+```
+
+**new**
+
+```swift
+class SavingsAccount: BasicAccount { 
+  var interestRate: Double 
+  private let pin: Int
+	init(interestRate: Double, pin: Int) { 
+    self.interestRate = interestRate 
+    self.pin = pin 
+  }
+	func processInterest(pin: Int) {
+    if pin == self.pin { 
+      let interest = balance * interestRate 
+      deposit(amount: interest) 
+    }
+	}
 }
 ```
 
