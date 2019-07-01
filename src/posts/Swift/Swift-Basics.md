@@ -167,7 +167,7 @@ doing this.
 // 会以末尾的 """ 的位置为基线去掉了每行开头的空格
 ```
 
-####[String as Collection](#String as Collection)
+####[String as Collection](#string-as-collection)
 
 #### Encoding
 
@@ -202,7 +202,7 @@ for i in characters.utf16 {
 // 56899 : 1101111001000011
 ```
 
-####Converting [indexes](#Indexing Strings) between encoding views
+####Converting [indexes](#indexing-strings) between encoding views
 
 ```swift
 let arrowIndex = characters.index(of: "\u{21e8}")! 
@@ -263,7 +263,7 @@ let halfOpenRange = 0..<5 //(0, 1, 2, 3, 4)
 
 #### open-ended range
 
-确定一个 index, 另一个为 [Collection](#Collections) 的开始或结尾
+确定一个 index, 另一个为 [Collection](#collections) 的开始或结尾
 
 ```swift
 let fullName = "Matt Naff" 

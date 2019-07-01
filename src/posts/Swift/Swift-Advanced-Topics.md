@@ -399,3 +399,221 @@ let song = \Jukebox.song
 jukebox[keyPath: song] = "Stairway to heaven"
 ```
 
+## Pattern matching
+
+```swift
+let coordinate = (x: 1, y: 0, z: 0)
+
+if case (_, 0, 0) = coordinate { 
+  print("along the x-axis") 
+}
+// 等价于
+if (coordinate.y == 0) && (coordinate.z == 0) { 
+  print("along the x-axis") 
+}
+```
+
+### if
+
+```swift
+func process(point: (x: Int, y: Int, z: Int)) -> String { 
+  if case (0, 0, 0) = point { 
+    return "At origin" 
+  } 
+  return "Not at origin" 
+}
+
+let point = (x: 0, y: 0, z: 0) 
+let response = process(point: point) // At origin
+```
+
+###guard
+
+```swift
+func process(point: (x: Int, y: Int, z: Int)) -> String { 
+  guard case (0, 0, 0) = point else { 
+    return "Not at origin" 
+  } // guaranteed point is at the origin 
+  return "At origin" 
+}
+```
+
+### Switch
+
+```swift
+func process(point: (x: Int, y: Int, z: Int)) -> String { 
+  let closeRange = -2...2 
+  let midRange = -5...5
+  switch point { 
+    case (0, 0, 0):
+			return "At origin" 
+    case (closeRange, closeRange, closeRange):
+			return "Very close to origin" 
+    case (midRange, midRange, midRange):
+    	return "Nearby origin" 
+    default:
+    	return "Not near origin" 
+  }
+}
+
+let point = (x: 15, y: 5, z: 3) 
+let response = process(point: point) // Not near origin
+```
+
+### for
+
+```swift
+let groupSizes = [1, 5, 4, 6, 2, 1, 3] 
+for case 1 in groupSizes { 
+  print("Found an individual") // 2 times 
+}
+```
+
+### Pattens
+
+#### Wildcard pattern
+
+```swift
+if case (_, 0, 0) = coordinate { 
+  // x can be any value. y and z must be exactly 0. 
+  print("On the x-axis") // Printed!
+}
+```
+
+#### Value-binding pattern
+
+```swift
+if case (let x, 0, 0) = coordinate { 
+  print("On the x-axis at \(x)") // Printed: 1 
+}
+
+if case let (x, y, 0) = coordinate { 
+  print("On the x-y plane at (\(x), \(y))") // Printed: 1, 0 
+}
+```
+
+#### Enumeration case pattern
+
+```swift
+enum Direction { 
+  case north, south, east, west 
+} 
+let heading = Direction.north 
+if case .north = heading {
+  print("Don't forget your jacket")
+}
+
+enum Organism { 
+  case plant 
+  case animal(legs: Int) 
+}
+
+let pet = Organism.animal(legs: 4)
+switch pet { 
+  case .animal(let legs):
+		print("Potentially cuddly with \(legs) legs") // Printed: 4 
+  default:
+		print("No chance for cuddles") 
+}
+```
+
+#### Optional pattern
+
+```swift
+let names: [String?] = ["Michelle", nil, "Brandon", "Christine", nil, "David"]
+for case let name? in names {
+  print(name) // 4 times 
+}
+```
+
+#### “Is” type-casting pattern
+
+```swift
+let array: [Any] = [15, "George", 2.0]
+for element in array { 
+  switch element { 
+    case is String:
+    	print("Found a string") // 1 time 
+    default:
+			print("Found something else") // 2 times 
+  } 
+}
+```
+
+#### “As” type-casting pattern
+
+```swift
+for element in array { 
+  switch element { 
+  case let text as String:
+    print("Found a string: \(text)") // 1 time 
+  default:
+    print("Found something else") // 2 times
+	} 
+}
+```
+
+#### Qualifying with where
+
+```swift
+for number in 1...9 { 
+  switch number { 
+  case let x where x % 2 == 0:
+		print("even") // 4 times 
+  default:
+		print("odd") // 5 times 
+  } 
+}
+```
+
+```swift
+enum LevelStatus { 
+  case complete 
+  case inProgress(percent: Double) 
+  case notStarted 
+}
+
+let levels: [LevelStatus] = [.complete, .inProgress(percent: 0.9), .notStarted]
+
+for level in levels {
+	switch level { 
+    case .inProgress(let percent) where percent > 0.8 :
+			print("Almost there!") 
+    case .inProgress(let percent) where percent > 0.5 :
+			print("Halfway there!") 
+    case .inProgress(let percent) where percent > 0.2 :
+			print("Made it through the beginning!") 
+    default:
+			break 
+  }
+}
+```
+
+#### Chaining with commas
+
+```swift
+func timeOfDayDescription(hour: Int) -> String { 
+  switch hour { 
+    case 0, 1, 2, 3, 4, 5:
+      return "Early morning" 
+    case 6, 7, 8, 9, 10, 11:
+      return "Morning" 
+    case 12, 13, 14, 15, 16:
+      return "Afternoon" 
+    case 17, 18, 19:
+      return "Evening" 
+    case 20, 21, 22, 23:
+      return "Late evening" 
+    default:
+      return "INVALID HOUR!"
+  }
+} 
+let timeOfDay = timeOfDayDescription(hour: 12) // Afternoon
+
+if case .animal(let legs) = pet, case 2...4 = legs { 
+  print("potentially cuddly") // Printed!
+} else {
+	print("no chance for cuddles") 
+}
+```
+
