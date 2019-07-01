@@ -167,7 +167,7 @@ doing this.
 // 会以末尾的 """ 的位置为基线去掉了每行开头的空格
 ```
 
-####[String as Collection](#string-as-collection)
+####[字符串的集合特征](#string-as-collection)
 
 #### Encoding
 
