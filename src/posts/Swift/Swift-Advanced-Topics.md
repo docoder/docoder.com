@@ -113,7 +113,7 @@ class SavingsAccount: BasicAccount { // 因为 BasicAccount 为 open
   func processInterest() { 
     let interest = balance * interestRate
     deposit(amount: interest)
-	}
+  }
 }
 ```
 
@@ -123,12 +123,12 @@ class SavingsAccount: BasicAccount { // 因为 BasicAccount 为 open
 
 ```swift
 public class CheckingAccount: BasicAccount { 
-	private var issuedChecks: [Int] = [] 
+  private var issuedChecks: [Int] = [] 
   private var currentCheck = 1
 }
 
-private extension CheckingAccount { // private 使扩展中方法仅能被 CheckingAccount 使用，外部不能使用
-	func inspectForFraud(with checkNumber: Int) -> Bool { 
+private extension CheckingAccount { // private 使扩展中方法仅能被 CheckingAccount 使用,外部不能使用
+  func inspectForFraud(with checkNumber: Int) -> Bool { 
     return issuedChecks.contains(checkNumber) 
   }
   func nextNumber() -> Int { 
@@ -167,7 +167,7 @@ class SavingsAccount: BasicAccount {
   func processInterest() { 
     let interest = balance * interestRate
     deposit(amount: interest)
-	}
+  }
 }
 ```
 
@@ -177,16 +177,16 @@ class SavingsAccount: BasicAccount {
 class SavingsAccount: BasicAccount { 
   var interestRate: Double 
   private let pin: Int
-	init(interestRate: Double, pin: Int) { 
+  init(interestRate: Double, pin: Int) { 
     self.interestRate = interestRate 
     self.pin = pin 
   }
-	func processInterest(pin: Int) {
+  func processInterest(pin: Int) {
     if pin == self.pin { 
       let interest = balance * interestRate 
       deposit(amount: interest) 
     }
-	}
+  }
 }
 ```
 
@@ -195,7 +195,7 @@ class SavingsAccount: BasicAccount {
 - preﬁx, postﬁx,  inﬁx
 
 ```swift
-infix operator **		// preﬁx, postﬁx, inﬁx
+infix operator **   // preﬁx, postﬁx, inﬁx
 func **(base: Int, power: Int) -> Int { 
   precondition(power >= 2) 
   var result = base 
@@ -259,7 +259,7 @@ subscript(parameterList) -> ReturnType { // 不能用 inout 或 默认参数
   get { 
     // return someValue of ReturnType 
   }
-	set(newValue) { // 可选, newValue 的类型为 ReturnType
+  set(newValue) { // 可选, newValue 的类型为 ReturnType
     // set someValue of ReturnType to newValue 
   }
 }
@@ -267,9 +267,9 @@ subscript(parameterList) -> ReturnType { // 不能用 inout 或 默认参数
 
 ```swift
 class Person {
-	let name: String 
+  let name: String 
   let age: Int
-	init(name: String, age: Int) { 
+  init(name: String, age: Int) { 
     self.name = name 
     self.age = age 
   }
@@ -277,15 +277,16 @@ class Person {
 let me = Person(name: "Cosmin", age: 32)
 
 extension Person {
-	subscript(key: String) -> String? { 
+  subscript(key: String) -> String? { 
     switch key { 
       case "name":
-				return name
+        return name
       case "age":
-				return "\(age)"
+        return "\(age)"
       default:
-      	return nil
+        return nil
     }
+  }
 }
 me["name"] // Cosmin
 me["age"] // 32
@@ -311,20 +312,20 @@ me[property: "gender"]
 ```swift
 @dynamicMemberLookup // 开启 Subscripts 点语法
 class Instrument {
-	let brand: String 
+  let brand: String 
   let year: Int 
   private let details: [String: String]
-	init(brand: String, year: Int, details: [String: String]) { 
+  init(brand: String, year: Int, details: [String: String]) { 
     self.brand = brand 
     self.year = year 
     self.details = details 
   }
-	subscript(dynamicMember key: String) -> String {  // 实现 subscript(dynamicMember:)
+  subscript(dynamicMember key: String) -> String {  // 实现 subscript(dynamicMember:)
     switch key { 
       case "info":
-      	return "\(brand) made in \(year)."
-			default:
-      	return details[key] ?? "" 
+        return "\(brand) made in \(year)."
+      default:
+        return details[key] ?? "" 
     } 
   }
 }
@@ -353,11 +354,11 @@ guitar.info
 
 ```swift
 class Tutorial {
-	let title: String 
+  let title: String 
   let author: Person 
   let type: String 
   let publishDate: Date
-	init(title: String, author: Person, type: String, publishDate: Date) { 
+  init(title: String, author: Person, type: String, publishDate: Date) { 
     self.title = title 
     self.author = author 
     self.type = type 
@@ -446,13 +447,13 @@ func process(point: (x: Int, y: Int, z: Int)) -> String {
   let midRange = -5...5
   switch point { 
     case (0, 0, 0):
-			return "At origin" 
+      return "At origin" 
     case (closeRange, closeRange, closeRange):
-			return "Very close to origin" 
+      return "Very close to origin" 
     case (midRange, midRange, midRange):
-    	return "Nearby origin" 
+      return "Nearby origin" 
     default:
-    	return "Not near origin" 
+      return "Not near origin" 
   }
 }
 
@@ -511,9 +512,9 @@ enum Organism {
 let pet = Organism.animal(legs: 4)
 switch pet { 
   case .animal(let legs):
-		print("Potentially cuddly with \(legs) legs") // Printed: 4 
+    print("Potentially cuddly with \(legs) legs") // Printed: 4 
   default:
-		print("No chance for cuddles") 
+    print("No chance for cuddles") 
 }
 ```
 
@@ -533,9 +534,9 @@ let array: [Any] = [15, "George", 2.0]
 for element in array { 
   switch element { 
     case is String:
-    	print("Found a string") // 1 time 
+      print("Found a string") // 1 time 
     default:
-			print("Found something else") // 2 times 
+      print("Found something else") // 2 times 
   } 
 }
 ```
@@ -549,7 +550,7 @@ for element in array {
     print("Found a string: \(text)") // 1 time 
   default:
     print("Found something else") // 2 times
-	} 
+  } 
 }
 ```
 
@@ -559,9 +560,9 @@ for element in array {
 for number in 1...9 { 
   switch number { 
   case let x where x % 2 == 0:
-		print("even") // 4 times 
+    print("even") // 4 times 
   default:
-		print("odd") // 5 times 
+    print("odd") // 5 times 
   } 
 }
 ```
@@ -576,15 +577,15 @@ enum LevelStatus {
 let levels: [LevelStatus] = [.complete, .inProgress(percent: 0.9), .notStarted]
 
 for level in levels {
-	switch level { 
+  switch level { 
     case .inProgress(let percent) where percent > 0.8 :
-			print("Almost there!") 
+      print("Almost there!") 
     case .inProgress(let percent) where percent > 0.5 :
-			print("Halfway there!") 
+      print("Halfway there!") 
     case .inProgress(let percent) where percent > 0.2 :
-			print("Made it through the beginning!") 
+      print("Made it through the beginning!") 
     default:
-			break 
+      break 
   }
 }
 ```
@@ -618,7 +619,7 @@ let timeOfDay = timeOfDayDescription(hour: 12) // Afternoon
 if case .animal(let legs) = pet, case 2...4 = legs { 
   print("potentially cuddly") // Printed!
 } else {
-	print("no chance for cuddles") 
+  print("no chance for cuddles") 
 }
 ```
 
@@ -635,7 +636,7 @@ let c: Number? = .integerValue(7)
 let d: Number? = .integerValue(8)
 
 if a != b {
-	if let c = c { 
+  if let c = c { 
     if let d = d { 
       if case .integerValue(let cValue) = c { 
         if case .integerValue(let dValue) = d { 
@@ -646,19 +647,19 @@ if a != b {
           } 
         } 
       }
-		}
-	}
+    }
+  }
 }
 // 等价于
 if a != b,
-	let c = c, 
-	let d = d, 
-	case .integerValue(let cValue) = c, 
-	case .integerValue(let dValue) = d, 
-	dValue > cValue { 
+  let c = c, 
+  let d = d, 
+  case .integerValue(let cValue) = c, 
+  case .integerValue(let dValue) = d, 
+  dValue > cValue { 
     print("a and b are different") // Printed!
-		print("d is greater than c") // Printed!
-		print("sum: \(a + b + cValue + dValue)") // Printed: 26
+    print("d is greater than c") // Printed!
+    print("sum: \(a + b + cValue + dValue)") // Printed: 26
 }
 ```
 
@@ -679,13 +680,13 @@ var password: String?
 
 switch (username, password) { 
   case let (username?, password?):
-		print("Success! User: \(username) Pass: \(password)") 
+    print("Success! User: \(username) Pass: \(password)") 
   case let (username?, nil):
-		print("Password is missing. User: \(username)") 
+    print("Password is missing. User: \(username)") 
   case let (nil, password?):
-  	print("Username is missing. Pass: \(password)") 
+    print("Username is missing. Pass: \(password)") 
   case (nil, nil):
-		print("Both username and password are missing") // Printed! 
+    print("Both username and password are missing") // Printed! 
 }
 ```
 
@@ -702,8 +703,8 @@ for _ in 1...3 {
 ```swift
 let user: String? = "Bob" 
 guard let _ = user else {
-	print("There is no user.")
-	fatalError() 
+  print("There is no user.")
+  fatalError() 
 } 
 print("User exists, but identity not needed.") // Printed!
 // 等价于
@@ -724,13 +725,13 @@ struct Rectangle {
 let view = Rectangle(width: 15, height: 60, color: "Green") 
 switch view { 
   case _ where view.height < 50:
-		print("Shorter than 50 units") 
+    print("Shorter than 50 units") 
   case _ where view.width > 20:
-		print("Over 50 tall, & over 20 wide") 
+    print("Over 50 tall, & over 20 wide") 
   case _ where view.color == "Green":
-		print("Over 50 tall, at most 20 wide, & green") // Printed! 
+    print("Over 50 tall, at most 20 wide, & green") // Printed! 
   default:
-		print("This view can't be described by this example") 
+    print("This view can't be described by this example") 
 }
 ```
 
@@ -754,7 +755,7 @@ let list = [0, 1, 2, 3]
 let integer = 2 
 let isInArray = (list ~= integer) // Error! 
 if case list = integer { // Error!
-	print("The integer is in the array") 
+  print("The integer is in the array") 
 } else {
   print("The integer is not in the array")
 }
@@ -773,7 +774,7 @@ let isInArray = (list ~= integer) // true
 if case list = integer { 
   print("The integer is in the array") // Printed! 
 } else {
-	print("The integer is not in the array") 
+  print("The integer is not in the array") 
 }
 ```
 
@@ -796,7 +797,7 @@ let snack = PetFood(rawValue: "fuuud!") // nil
 struct PetHouse { 
   let squareFeet: Int
   // 用 init? 创建一个 Failable initializer. 保证实例有正确的属性, 否则就不存在
-	init?(squareFeet: Int) { 
+  init?(squareFeet: Int) { 
     if squareFeet < 1 { 
       return nil 
     } 
@@ -812,13 +813,13 @@ let house = PetHouse(squareFeet: 1) // Optional(Pethouse)
 ```swift
 class Pet { 
   var breed: String?
-	init(breed: String? = nil) { 
+  init(breed: String? = nil) { 
     self.breed = breed 
   }
 }
 class Person { 
   let pet: Pet
-	init(pet: Pet) { 
+  init(pet: Pet) { 
     self.pet = pet 
   }
 }
@@ -831,41 +832,41 @@ let dogBreed = janie.pet.breed! // This is bad! Will cause a crash!
 if let dogBreed = janie.pet.breed { 
   print("Olive is a \(dogBreed)") 
 } else {
-	print("Olive's breed is unknown.") 
+  print("Olive's breed is unknown.") 
 }
 ```
 
 ```swift
 class Toy {
-	enum Kind { 
+  enum Kind { 
     case ball 
     case zombie 
     case bone 
     case mouse 
   }
-	enum Sound { 
+  enum Sound { 
     case squeak 
     case bell 
   }
-	let kind: Kind 
+  let kind: Kind 
   let color: String 
   var sound: Sound?
-	init(kind: Kind, color: String, sound: Sound? = nil) { 
+  init(kind: Kind, color: String, sound: Sound? = nil) { 
     self.kind = kind 
     self.color = color 
     self.sound = sound 
   }
 }
 class Pet {
-	enum Kind { 
+  enum Kind { 
     case dog 
     case cat 
     case guineaPig 
   }
-	let name: String 
+  let name: String 
   let kind: Kind 
   let favoriteToy: Toy?
-	init(name: String, kind: Kind, favoriteToy: Toy? = nil) { 
+  init(name: String, kind: Kind, favoriteToy: Toy? = nil) { 
     self.name = name 
     self.kind = kind 
     self.favoriteToy = favoriteToy 
@@ -873,7 +874,7 @@ class Pet {
 }
 class Person { 
   let pet: Pet?
-	init(pet: Pet? = nil) { 
+  init(pet: Pet? = nil) { 
     self.pet = pet 
   }
 }
@@ -904,19 +905,19 @@ let felipe = Person()
 if let sound = janie.pet?.favoriteToy?.sound { // optional chaining
   print("Sound \(sound)") 
 } else {
-	print("No sound.") 
+  print("No sound.") 
 }
 
 if let sound = tammy.pet?.favoriteToy?.sound { 
   print("Sound \(sound)") 
 } else {
-	print("No sound.") 
+  print("No sound.") 
 }
 
 if let sound = felipe.pet?.favoriteToy?.sound { 
   print("Sound \(sound)") 
 } else {
-	print("No sound.") 
+  print("No sound.") 
 }
 ```
 
@@ -945,9 +946,9 @@ for pet in betterPetNames {
 
 ```swift
 class Pastry {
-	let flavor: String 
+  let flavor: String 
   var numberOnHand: Int
-	init(flavor: String, numberOnHand: Int) { 
+  init(flavor: String, numberOnHand: Int) { 
     self.flavor = flavor 
     self.numberOnHand = numberOnHand 
   }
@@ -960,13 +961,13 @@ enum BakeryError: Error {
 }
 
 class Bakery {
-	var itemsForSale = [ 
+  var itemsForSale = [ 
     "Cookie": Pastry(flavor: "ChocolateChip", numberOnHand: 20), 
     "PopTart": Pastry(flavor: "WildBerry", numberOnHand: 13), 
     "Donut" : Pastry(flavor: "Sprinkles", numberOnHand: 24), 
     "HandPie": Pastry(flavor: "Cherry", numberOnHand: 6) 
   ]
-	func orderPastry(
+  func orderPastry(
     item: String, 
     amountRequested: Int, 
     flavor: String) throws -> Int { // throw errors
@@ -975,29 +976,29 @@ class Bakery {
       throw BakeryError.doNotSell 
     }
     
-  	guard flavor == pastry.flavor else {
-			throw BakeryError.wrongFlavor 
+    guard flavor == pastry.flavor else {
+      throw BakeryError.wrongFlavor 
     } 
     
     guard amountRequested <= pastry.numberOnHand else {
-			throw BakeryError.tooFew(numberOnHand: pastry.numberOnHand) 
+      throw BakeryError.tooFew(numberOnHand: pastry.numberOnHand) 
     } 
     
     pastry.numberOnHand -= amountRequested
-		return pastry.numberOnHand
-	}
+    return pastry.numberOnHand
+  }
 }
 
 let bakery = Bakery()
 // handle errors
 do {
-	try bakery.orderPastry(item: "Albatross", amountRequested: 1, flavor: "AlbatrossFlavor") 
+  try bakery.orderPastry(item: "Albatross", amountRequested: 1, flavor: "AlbatrossFlavor") 
 } catch BakeryError.doNotSell {
-	print("Sorry, but we don't sell this item") 
+  print("Sorry, but we don't sell this item") 
 } catch BakeryError.wrongFlavor {
-	print("Sorry, but we don't carry this flavor") 
+  print("Sorry, but we don't carry this flavor") 
 } catch BakeryError.tooFew {
-	print("Sorry, we don't have enough items to fulfill your order") 
+  print("Sorry, we don't have enough items to fulfill your order") 
 }
 ```
 
@@ -1022,7 +1023,7 @@ try! bakery.orderPastry(item: "Cookie", amountRequested: 1, flavor: "ChocolateCh
 do { 
   try bakery.orderPastry(item: "Cookie", amountRequested: 1, flavor: "ChocolateChip") 
 } catch {
-	fatalError() 
+  fatalError() 
 }
 ```
 
@@ -1040,20 +1041,20 @@ enum PugBotError: Error {
 }
 
 class PugBot {
-	let name: String 
+  let name: String 
   let correctPath: [Direction] 
   private var currentStepInPath = 0
-	init(name: String, correctPath: [Direction]) { 
+  init(name: String, correctPath: [Direction]) { 
     self.correctPath = correctPath 
     self.name = name 
   }
-	func turnLeft() throws {
-		guard currentStepInPath < correctPath.count else { 
+  func turnLeft() throws {
+    guard currentStepInPath < correctPath.count else { 
       throw PugBotError.endOfPath 
     } 
     let nextDirection = correctPath[currentStepInPath] 
     guard nextDirection == .left else {
-			throw PugBotError.invalidMove(found: .left, expected: nextDirection) 
+      throw PugBotError.invalidMove(found: .left, expected: nextDirection) 
     } 
     currentStepInPath += 1
   }
@@ -1097,7 +1098,7 @@ func goHome() throws {
 do { 
   try goHome() 
 } catch {
-	print("PugBot failed to get home.") 
+  print("PugBot failed to get home.") 
 }
 ```
 
@@ -1105,15 +1106,15 @@ do {
 
 ```swift
 func moveSafely(_ movement: () throws -> ()) -> String {
-	do { 
+  do { 
     try movement() 
     return "Completed operation successfully."
-	} catch PugBotError.invalidMove(let found, let expected) {
-		return "The PugBot was supposed to move \(expected), but moved \(found) instead."
-	} catch PugBotError.endOfPath {
-		return "The PugBot tried to move past the end of the path." 
+  } catch PugBotError.invalidMove(let found, let expected) {
+    return "The PugBot was supposed to move \(expected), but moved \(found) instead."
+  } catch PugBotError.endOfPath {
+    return "The PugBot tried to move past the end of the path." 
   } catch { // 必需一个默认的 catch. 虽然是枚举类型.
-		return "An unknown error occurred" 
+    return "An unknown error occurred" 
   }
 }
 
@@ -1220,7 +1221,7 @@ struct Employee: Codable {
   var name: String 
   var id: Int 
   var favoriteToy: Toy?
-	enum CodingKeys: String, CodingKey { 
+  enum CodingKeys: String, CodingKey { 
     case id = "employeeId" 
     case name 
     case favoriteToy 
@@ -1240,7 +1241,7 @@ struct Employee { // remove Employee’s conformance to Codable (Encodable & Dec
   var name: String 
   var id: Int 
   var favoriteToy: Toy?
-	enum CodingKeys: String, CodingKey { 
+  enum CodingKeys: String, CodingKey { 
     case id = "employeeId" 
     case name 
     case gift
@@ -1260,7 +1261,7 @@ extension Employee: Encodable {
 }
 // Decodable (string -> instance)
 extension Employee: Decodable {
-	init(from decoder: Decoder) throws { 
+  init(from decoder: Decoder) throws { 
     let values = try decoder.container(keyedBy: CodingKeys.self) 
     name = try values.decode(String.self, forKey: .name) 
     id = try values.decode(Int.self, forKey: .id) 
@@ -1285,7 +1286,7 @@ extension Employee: Encodable {
 }
 
 extension Employee: Decodable {
-	init(from decoder: Decoder) throws { 
+  init(from decoder: Decoder) throws { 
     let values = try decoder.container(keyedBy: CodingKeys.self) 
     name = try values.decode(String.self, forKey: .name) 
     id = try values.decode(Int.self, forKey: .id) 
@@ -1302,23 +1303,23 @@ extension Employee: Decodable {
 
 ```swift
 class Tutorial {
-	let title: String 
+  let title: String 
   var editor: Editor?
-	init(title: String) { 
+  init(title: String) { 
     self.title = title 
   }
-	deinit { 
+  deinit { 
     print("Goodbye Tutorial \(title)!") 
   }
 }
 
 class Editor {
-	let name: String 
+  let name: String 
   var tutorials: [Tutorial] = []
-	init(name: String) { 
+  init(name: String) { 
     self.name = name 
   }
-	deinit { 
+  deinit { 
     print("Goodbye Editor \(name)!") 
   }
 }
@@ -1342,12 +1343,12 @@ do {
 
 ```swift
 class Tutorial {
-	let title: String 
+  let title: String 
   weak var editor: Editor? // weak reference (optional) break the cycle
-	init(title: String) { 
+  init(title: String) { 
     self.title = title 
   }
-	deinit { 
+  deinit { 
     print("Goodbye Tutorial \(title)!") 
   }
 }
@@ -1360,25 +1361,25 @@ class Tutorial {
 
 ```swift
 class Tutorial {
-	let title: String 
+  let title: String 
   unowned let author: Author // unowned reference (非 optional)
   weak var editor: Editor?
-	init(title: String, author: Author) { 
+  init(title: String, author: Author) { 
     self.title = title 
     self.author = author 
   } 
   deinit {
-		print("Goodbye Tutorial \(title)!") 
+    print("Goodbye Tutorial \(title)!") 
   }
 }
 
 class Author {
-	let name: String 
+  let name: String 
   var tutorials: [Tutorial] = []
-	init(name: String) { 
+  init(name: String) { 
     self.name = name 
   }
-	deinit { 
+  deinit { 
     print("Goodbye Author \(name)!") 
   }
 }
@@ -1404,7 +1405,7 @@ do {
 
 ```swift
 class Tutorial {
-	let title: String 
+  let title: String 
   unowned let author: Author
   weak var editor: Editor?
   
@@ -1413,12 +1414,12 @@ class Tutorial {
     return "\(self.title) by \(self.author.name)" 
   }
   
-	init(title: String, author: Author) { 
+  init(title: String, author: Author) { 
     self.title = title 
     self.author = author 
   } 
   deinit {
-		print("Goodbye Tutorial \(title)!") 
+    print("Goodbye Tutorial \(title)!") 
   }
 }
 ```
@@ -1448,7 +1449,7 @@ f()
 
 ```swift
 class Tutorial {
-	let title: String 
+  let title: String 
   unowned let author: Author
   weak var editor: Editor?
   
@@ -1458,12 +1459,12 @@ class Tutorial {
     return "\(self.title) by \(self.author.name)" 
   }
   
-	init(title: String, author: Author) { 
+  init(title: String, author: Author) { 
     self.title = title 
     self.author = author 
   } 
   deinit {
-		print("Goodbye Tutorial \(title)!") 
+    print("Goodbye Tutorial \(title)!") 
   }
 }
 ```
@@ -1480,13 +1481,13 @@ class Tutorial {
 
 ```swift
 func log(message: String) {
-	let thread = Thread.current.isMainThread ? "Main" : "Background"
-	print("\(thread) thread: \(message)")
+  let thread = Thread.current.isMainThread ? "Main" : "Background"
+  print("\(thread) thread: \(message)")
 }
 
 func addNumbers(upTo range: Int) -> Int {
-	log(message: "Adding numbers...")
-	return (1...range).reduce(0, +)
+  log(message: "Adding numbers...")
+  return (1...range).reduce(0, +)
 }
 
 let queue = DispatchQueue(label: "queue") // a serial queue
@@ -1504,7 +1505,7 @@ func execute<Result>(backgroundWork: @escaping () -> Result,  // 需要显示用
 }
 
 execute(backgroundWork: { addNumbers(upTo: 100) }, 
-        mainWork: { log(message: "The sum is \($0)") })
+  mainWork: { log(message: "The sum is \($0)") })
 
 // Background thread: Adding numbers... 
 // Main thread: The sum is 5050
@@ -1562,7 +1563,7 @@ extension Editor {
 ```swift
 struct Color: CustomStringConvertible { 
   var red, green, blue: Double
-	var description: String { 
+  var description: String { 
     return "r: \(red) g: \(green) b: \(blue)"               
   }
 }
@@ -1577,12 +1578,12 @@ extension Color {
 
 // Paint bucket abstraction 
 class Bucket {
-	var color: Color 
+  var color: Color 
   var isRefilled = false
-	init(color: Color) { 
+  init(color: Color) { 
     self.color = color 
   }
-	func refill() { 
+  func refill() { 
     isRefilled = true 
   }
 }
@@ -1689,7 +1690,7 @@ exposeValue(x) // => final value derived from x
   {
     var accent = Color.white // a value type
     private var bucket = Bucket() // a private reference type, for "deep storage" 
-  	// a pseudo-value type, using the deep storage 
+    // a pseudo-value type, using the deep storage 
     var bucketColor: Color { 
       get { 
         return bucket.color 
@@ -1704,10 +1705,10 @@ exposeValue(x) // => final value derived from x
   struct PaintingPlan // a value type, containing ... 
   { 
     // ... as above ...
-  	// a computed property facade over deep storage 
+    // a computed property facade over deep storage 
     // with copy-on-write and in-place mutation when possible 
     var bucketColor: Color {
-  		get { 
+      get { 
         return bucket.color 
       } 
       set { 
@@ -1718,7 +1719,7 @@ exposeValue(x) // => final value derived from x
           bucket = Bucket(color: newValue) 
         } 
       }
-  	}
+    }
   }
   ```
 
@@ -1765,7 +1766,7 @@ extension TeamRecord {
 struct BaseballRecord: TeamRecord { 
   var wins: Int 
   var losses: Int
-	var winningPercentage: Double { 
+  var winningPercentage: Double { 
     return Double(wins) / Double(wins + losses) 
   }
 }
@@ -1787,7 +1788,7 @@ struct BasketballRecord: TeamRecord {
   let seasonLength = 82
   // winningPercentage 的实现与 BaseballRecord 相同
   // TeamRecord 的 winningPercentage 实现大多数可能都相同
-	var winningPercentage: Double { 
+  var winningPercentage: Double { 
     return Double(wins) / Double(wins + losses) 
   }
 }
@@ -1813,7 +1814,7 @@ struct HockeyRecord: TeamRecord {
   var losses: Int 
   var ties: Int
   
-	// Hockey record introduces ties, and has 
+  // Hockey record introduces ties, and has 
   // its own implementation of winningPercentage 
   var winningPercentage: Double { // 自定义
     return Double(wins) / Double(wins + losses + ties) 
@@ -1846,7 +1847,7 @@ struct CricketRecord: WinLoss {
   var wins: Int 
   var losses: Int 
   var draws: Int
-	var winningPercentage: Double { 
+  var winningPercentage: Double { 
     return Double(wins) / Double(wins + losses + draws) 
   }
 }
@@ -1880,7 +1881,7 @@ struct HockeyRecord: TeamRecord {
   var wins: Int 
   var losses: Int 
   var ties: Int
-	var winningPercentage: Double { // 自定义的，但也会有很多与之相同的实现
+  var winningPercentage: Double { // 自定义的，但也会有很多与之相同的实现
     return Double(wins) / Double(wins + losses + ties) 
   }
 }
@@ -1931,7 +1932,7 @@ struct BaseballRecord: TeamRecordBase {
 // add ties to the mix
 class HockeyRecord: TeamRecordBase { 
   var ties = 0
-	override var winningPercentage: Double { 
+  override var winningPercentage: Double { 
     return Double(wins) / Double(wins + losses + ties) 
   }
 }
