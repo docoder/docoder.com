@@ -36,7 +36,7 @@ date: "2019-06-27"
 ```swift
 protocol Account { 
   associatedtype Currency
-	var balance: Currency { get }
+  var balance: Currency { get }
   func deposit(amount: Currency) 
   func withdraw(amount: Currency)
 }
@@ -44,13 +44,13 @@ protocol Account {
 typealias Dollars = Double
 /// A U.S. Dollar based "basic" account. 
 open class BasicAccount: Account {
-	// private(set) var balance: Dollars = 0.0 // private set, 外部不可修改
+  // private(set) var balance: Dollars = 0.0 // private set, 外部不可修改
   public var balance: Dollars = 0.0
   public init() { }
-	public func deposit(amount: Dollars) { 
+  public func deposit(amount: Dollars) { 
     balance += amount 
   }
-	func withdraw(amount: Dollars) { 
+  func withdraw(amount: Dollars) { 
     if amount <= balance { 
       balance -= amount 
     } else { 
@@ -61,34 +61,34 @@ open class BasicAccount: Account {
 
 public class CheckingAccount: BasicAccount { 
   private let accountNumber = UUID().uuidString // private, 外部不可读取或修改
-	class Check {
-		let account: String 
+  class Check {
+    let account: String 
     var amount: Dollars 
     private(set) var cashed = false
-		func cash() { 
+    func cash() { 
       cashed = true 
     }
-		fileprivate init(amount: Dollars, from account: CheckingAccount) {  //fileprivate, 相同文件内可访问
+    fileprivate init(amount: Dollars, from account: CheckingAccount) {  //fileprivate, 相同文件内可访问
       self.amount = amount 
       self.account = account.accountNumber 
     }
-	}
+  }
   func writeCheck(amount: Dollars) -> Check? { 
     guard balance > amount else { 
       return nil 
     }
-		let check = Check(amount: amount, from: self) 
+    let check = Check(amount: amount, from: self) 
     withdraw(amount: check.amount) 
     return check
-	}
+  }
 
-	func deposit(_ check: Check) { 
+  func deposit(_ check: Check) { 
     guard !check.cashed else { 
       return 
     }
     deposit(amount: check.amount) 
     check.cash()
-	}
+  }
 }
 
 let johnChecking = CheckingAccount() // John 创建了支票账户
