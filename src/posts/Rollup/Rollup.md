@@ -165,13 +165,13 @@ export default {
     {
       file: pkg.main,
       format: "cjs",
-      exports: "named",
+      // exports: "named",
       sourcemap: true
     },
     {
       file: pkg.module,
       format: "es",
-      exports: "named",
+      // exports: "named",
       sourcemap: true
     }
   ],
@@ -180,33 +180,15 @@ export default {
     ...Object.keys(pkg.peerDependencies || {})
   ],
   plugins: [
+    commonjs({  // 置于最前 ( 否则可能需要配置 namedExports 才能阻止保错 )
+      include: ["node_modules/**"],
+    }),
     external(),
     resolve(),
     typescript({
       rollupCommonJSResolveHack: true,
       exclude: "**/__tests__/**",
       clean: true
-    }),
-    commonjs({
-      include: ["node_modules/**"],
-      namedExports: {
-        "node_modules/react/index.js": [
-          "Children",
-          "Component",
-          "PropTypes",
-          "createElement",
-          "useLayoutEffect",
-          "useEffect",
-          "useMemo",
-          "useContext",
-          "useRef",
-          "useReducer"
-        ],
-        'node_modules/react-is/index.js': [
-            'isValidElementType', 
-            'isContextConsumer'
-        ]
-      }
     })
   ]
 };
@@ -267,6 +249,6 @@ $ yarn link # 会在全局生成一个 link 文件 (如：.nvm/versions/node/v10
 $ yarn link your-package-name # link 到全局的 link 文件，从而又 link 到开发的库文件目录
 
 # Fix Duplicate React: https://github.com/facebook/react/issues/15315#issuecomment-479802153
-npm link ../example/node_modules/react
+$ npm link ../example/node_modules/react
 ```
 
