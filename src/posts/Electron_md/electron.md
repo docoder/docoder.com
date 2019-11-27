@@ -45,8 +45,8 @@ date: "2019-11-25"
 
     ```js
     app.on('ready', () => {
-    	console.log('App is ready!')
-      createWindow() // Create a new BrowserWindow when `app` is ready
+        console.log('App is ready!')
+        createWindow() // Create a new BrowserWindow when `app` is ready
     })
     ```
     
@@ -56,14 +56,14 @@ date: "2019-11-25"
 
     ```js
     app.on('before-quit', () => {
-  		console.log('App is quitting')
+  	    console.log('App is quitting')
     })
     ```
     ```js
     app.on('before-quit', (e) => {
-      e.preventDefault()
-      storeUserData() // 应用退出之前，保存数据
-      app.quit()
+        e.preventDefault()
+        storeUserData() // 应用退出之前，保存数据
+        app.quit()
     })
     ```
   
@@ -110,11 +110,11 @@ date: "2019-11-25"
 
     ```js
     app.on('ready', () => {
-      console.log(app.getPath('desktop'))
-      console.log(app.getPath('music'))
-      console.log(app.getPath('temp')) // 存储临时数据目录
-      console.log(app.getPath('userData')) // 存储应用的用户数据目录，不用担心没有权限或目录不存在
-      //...
+        console.log(app.getPath('desktop'))
+        console.log(app.getPath('music'))
+        console.log(app.getPath('temp')) // 存储临时数据目录
+        console.log(app.getPath('userData')) // 存储应用的用户数据目录，不用担心没有权限或目录不存在
+        //...
     })
     ```
 
@@ -142,12 +142,12 @@ date: "2019-11-25"
   - focus
 
     ```js
-    mainWindow.on('focus', () => { 	// 此窗口获得焦点时调用
-      console.log('Main win focused')
+    mainWindow.on('focus', () => { // 此窗口获得焦点时调用
+        console.log('Main win focused')
     })
     
-    app.on('browser-window-focus', () => {  // 无论哪个窗口获得焦点时都会调用一次
-      console.log('App focused')
+    app.on('browser-window-focus', () => { // 无论哪个窗口获得焦点时都会调用一次
+        console.log('App focused')
     })
     ```
 
@@ -362,13 +362,12 @@ date: "2019-11-25"
   ```js
   const { BrowserWindow } = require('electron')
   
-    let win = new BrowserWindow({ show: false })
-    win.once('ready-to-show', () => {
-    win.show()
-      
+  let win = new BrowserWindow({ show: false })
+  win.once('ready-to-show', () => {
+      win.show()
   })
   ```
-
+  
 - Setting `backgroundColor`
 
   ```js
@@ -380,40 +379,42 @@ date: "2019-11-25"
 ##### Parent and child windows
 
   ```js
-function createWindow () {
+function createWindow() {
 
-  mainWindow = new BrowserWindow({
-    width: 1000, height: 800,
-    webPreferences: { nodeIntegration: true }
-  })
+    mainWindow = new BrowserWindow({
+        width: 1000,
+        height: 800,
+        webPreferences: { nodeIntegration: true }
+    })
 
-  secondaryWindow = new BrowserWindow({
-    width: 600, height: 300,
-    webPreferences: { nodeIntegration: true },
-    parent: mainWindow, // 指定父窗口，只有父窗口存在时，其才能存在，子窗口也会随父窗口移动而移动
-    modal: true, // 设为模态窗口
-    show: false // 开始不显示窗口
-  })
+    secondaryWindow = new BrowserWindow({
+        width: 600,
+        height: 300,
+        webPreferences: { nodeIntegration: true },
+        parent: mainWindow, // 指定父窗口，只有父窗口存在时，其才能存在，子窗口也会随父窗口移动而移动
+        modal: true, // 设为模态窗口
+        show: false // 开始不显示窗口
+    })
 
-  // Load index.html into the new BrowserWindow
-  mainWindow.loadFile('index.html')
-  secondaryWindow.loadFile('secondary.html')
+    // Load index.html into the new BrowserWindow
+    mainWindow.loadFile('index.html')
+    secondaryWindow.loadFile('secondary.html')
 
-  setTimeout( () => {
-    secondaryWindow.show() // 显示子窗口
-    setTimeout( () => {
-      secondaryWindow.close() // 关闭子窗口
-      secondaryWindow = null
-    }, 3000)
-  }, 2000)
+    setTimeout(() => {
+        secondaryWindow.show() // 显示子窗口
+        setTimeout(() => {
+            secondaryWindow.close() // 关闭子窗口
+            secondaryWindow = null
+        }, 3000)
+    }, 2000)
 
-  // Open DevTools - Remove for PRODUCTION!
-  // mainWindow.webContents.openDevTools();
+    // Open DevTools - Remove for PRODUCTION!
+    // mainWindow.webContents.openDevTools();
 
-  // Listen for window being closed
-  mainWindow.on('closed',  () => {
-    mainWindow = null
-  })
+    // Listen for window being closed
+    mainWindow.on('closed', () => {
+        mainWindow = null
+    })
 
 }
   ```
@@ -423,25 +424,26 @@ function createWindow () {
   ```html
 <!DOCTYPE html>
 <html>
-  <head>
-    ...
-  </head>
-  <body style="user-select:none; -webkit-app-region:drag; padding-top:20px;">
-    ...
+<head>
+    <!-- ... -->
+</head>
+<body style="user-select:none; -webkit-app-region:drag; padding-top:20px;">
+    <!-- ... -->
     <input style="-webkit-app-region:no-drag;" type="range" name="range" min="0" max="10">
-    ...
-  </body>
+    <!-- ... -->
+</body>
 </html>
   ```
 
   ```js
 mainWindow = new BrowserWindow({
-  
-  width: 1000, height: 800,
-  frame: false,
-  titleBarStyle: 'hidden',
-  webPreferences: { nodeIntegration: true }
-  
+
+    width: 1000,
+    height: 800,
+    frame: false,
+    titleBarStyle: 'hidden',
+    webPreferences: { nodeIntegration: true }
+
 })
   ```
 
@@ -450,83 +452,92 @@ mainWindow = new BrowserWindow({
 ![session](./session.jpg)
 
 ```js
-const {app, BrowserWindow, session} = require('electron')
+const { app, BrowserWindow, session } = require('electron')
 //...
-function createWindow () {
-	//...
-  
-  mainWindow = new BrowserWindow({
-    width: 1000, height: 800,
-    webPreferences: { nodeIntegration: true }
-  })
-  
-  secWindow = new BrowserWindow({
-    width: 800, height: 600,
-    x: 200, y: 200,
-    webPreferences: { nodeIntegration: true }
-  })
+function createWindow() {
+    //...
 
-  let ses = mainWindow.webContents.session
-  let ses2 = secWindow.webContents.session
-  console.log( Object.is(ses, ses2) ) // true // 默认 session 都是所有窗口共享的
-  
-  let defaultSes = session.defaultSession
-  console.log( Object.is(ses, defaultSes) ) // true
-  
-  //...
+    mainWindow = new BrowserWindow({
+        width: 1000,
+        height: 800,
+        webPreferences: { nodeIntegration: true }
+    })
+
+    secWindow = new BrowserWindow({
+        width: 800,
+        height: 600,
+        x: 200,
+        y: 200,
+        webPreferences: { nodeIntegration: true }
+    })
+
+    let ses = mainWindow.webContents.session
+    let ses2 = secWindow.webContents.session
+    console.log(Object.is(ses, ses2)) // true // 默认 session 都是所有窗口共享的
+
+    let defaultSes = session.defaultSession
+    console.log(Object.is(ses, defaultSes)) // true
+
+    //...
 }
 
 //...
 ```
 
 ```js
-const {app, BrowserWindow, session} = require('electron')
+const { app, BrowserWindow, session } = require('electron')
 //...
-function createWindow () {
-	//...
-  mainWindow = new BrowserWindow({
-    width: 1000, height: 800,
-    webPreferences: { nodeIntegration: true }
-  })
-  
-  // let customSes = session.fromPartition('part1') // 自定义 session，并不会持久化
-  let customSes = session.fromPartition('persist:part1') // 自定义 session，可以持久化
-  
-  secWindow = new BrowserWindow({
-    width: 800, height: 600,
-    x: 200, y: 200,
-    webPreferences: {
-      nodeIntegration: true,
-      session: customSes // 此窗口使用自定义 session
-    }
-  })
-  
-  let ses = mainWindow.webContents.session
-  console.log( Object.is(ses, customSes) ) // false
-  //...
+function createWindow() {
+    //...
+    mainWindow = new BrowserWindow({
+        width: 1000,
+        height: 800,
+        webPreferences: { nodeIntegration: true }
+    })
+
+    // let customSes = session.fromPartition('part1') // 自定义 session，并不会持久化
+    let customSes = session.fromPartition('persist:part1') // 自定义 session，可以持久化
+
+    secWindow = new BrowserWindow({
+        width: 800,
+        height: 600,
+        x: 200,
+        y: 200,
+        webPreferences: {
+            nodeIntegration: true,
+            session: customSes // 此窗口使用自定义 session
+        }
+    })
+
+    let ses = mainWindow.webContents.session
+    console.log(Object.is(ses, customSes)) // false
+    //...
 }
 //...
 ```
 
 ```js
-const {app, BrowserWindow, session} = require('electron')
+const { app, BrowserWindow, session } = require('electron')
 //...
-function createWindow () {
-	//...
-  mainWindow = new BrowserWindow({
-    width: 1000, height: 800,
-    webPreferences: { nodeIntegration: true }
-  })
-  
-  secWindow = new BrowserWindow({
-    width: 800, height: 600,
-    x: 200, y: 200,
-    webPreferences: {
-      nodeIntegration: true,
-     	partition: 'persist:part1' // 简写, 自定义持久化 session
-    }
-  })
-  //...
+function createWindow() {
+    //...
+    mainWindow = new BrowserWindow({
+        width: 1000,
+        height: 800,
+        webPreferences: { nodeIntegration: true }
+    })
+
+    secWindow = new BrowserWindow({
+        width: 800,
+        height: 600,
+        x: 200,
+        y: 200,
+        webPreferences: {
+            nodeIntegration: true,
+            partition: 'persist:part1' // 简写, 自定义持久化 session
+        }
+    })
+    //...
 }
 //...
 ```
@@ -544,88 +555,91 @@ function createWindow () {
 #### [cookies](https://electronjs.org/docs/api/cookies#类：cookies)
 
 ```js
-const {app, BrowserWindow, session} = require('electron')
+const { app, BrowserWindow, session } = require('electron')
 //...
-function createWindow () {
-	//...
-  let ses = session.defaultSession
-  ses.cookies.get({}, (err, cookies) => { // {} 表示获取所有 cookies
-    console.log(cookies)
-  })
-  
-  mainWindow = new BrowserWindow({
-    width: 1000, height: 800,
-    webPreferences: { nodeIntegration: true }
-  })
-  //...
+function createWindow() {
+    //...
+    let ses = session.defaultSession
+    ses.cookies.get({}, (err, cookies) => { // {} 表示获取所有 cookies
+        console.log(cookies)
+    })
+
+    mainWindow = new BrowserWindow({
+        width: 1000,
+        height: 800,
+        webPreferences: { nodeIntegration: true }
+    })
+    //...
 }
 //...
 ```
 
 ```js
-const {app, BrowserWindow, session} = require('electron')
+const { app, BrowserWindow, session } = require('electron')
 //...
-function createWindow () {
-	//...
-  let ses = session.defaultSession
- 	let getCookies = () => {
-    ses.cookies.get({}, (err, cookies) => {
-      console.log(cookies)
-    })
-  }
+function createWindow() {
+    //...
+    let ses = session.defaultSession
+    let getCookies = () => {
+        ses.cookies.get({}, (err, cookies) => {
+            console.log(cookies)
+        })
+    }
 
-  mainWindow = new BrowserWindow({
-    width: 1000, height: 800,
-    webPreferences: { nodeIntegration: true }
-  })
-  
-  mainWindow.loadURL('https://github.com')
-  
-  mainWindow.webContents.on('did-finish-load', e => {
-    getCookies()
-  })
-  //...
+    mainWindow = new BrowserWindow({
+        width: 1000,
+        height: 800,
+        webPreferences: { nodeIntegration: true }
+    })
+
+    mainWindow.loadURL('https://github.com')
+
+    mainWindow.webContents.on('did-finish-load', e => {
+        getCookies()
+    })
+    //...
 }
 //...
 ```
 
 ```js
-const {app, BrowserWindow, session} = require('electron')
+const { app, BrowserWindow, session } = require('electron')
 //...
-function createWindow () {
-	//...
-  let ses = session.defaultSession
- 	let getCookies = () => {
-    // 只获取特定的 cookie, 过滤 name 为 'cookie1' 的 cookie
-    ses.cookies.get({ name:'cookie1' }, (err, cookies) => { 
-      console.log(cookies)
-    })
-  }
+function createWindow() {
+    //...
+    let ses = session.defaultSession
+    let getCookies = () => {
+        // 只获取特定的 cookie, 过滤 name 为 'cookie1' 的 cookie
+        ses.cookies.get({ name: 'cookie1' }, (err, cookies) => {
+            console.log(cookies)
+        })
+    }
 
-  mainWindow = new BrowserWindow({
-    width: 1000, height: 800,
-    webPreferences: { nodeIntegration: true }
-  })
-  
-  mainWindow.loadFile('index.html')
-  
-   let cookie = { 
-     url:'https://myappdomain.com', 
-     name:'cookie1', 
-     value:'electron', 
-     expirationDate:1613852855 // 如果需要将此自定义 cookie 持久化，则必须配置
-   }
-  
-  ses.cookies.set( cookie, err => {
-    console.log('cookie1 set')
-    getCookies()
-  })
-  
-  //ses.cookies.remove('https://myappdomain.com', 'cookie1', err => {
-  //  getCookies()
-  //})
-  
-  //...
+    mainWindow = new BrowserWindow({
+        width: 1000,
+        height: 800,
+        webPreferences: { nodeIntegration: true }
+    })
+
+    mainWindow.loadFile('index.html')
+
+    let cookie = {
+        url: 'https://myappdomain.com',
+        name: 'cookie1',
+        value: 'electron',
+        expirationDate: 1613852855 // 如果需要将此自定义 cookie 持久化，则必须配置
+    }
+
+    ses.cookies.set(cookie, err => {
+        console.log('cookie1 set')
+        getCookies()
+    })
+
+    //ses.cookies.remove('https://myappdomain.com', 'cookie1', err => {
+    //  getCookies()
+    //})
+
+    //...
 }
 
 //...
@@ -660,56 +674,58 @@ function createWindow () {
   ```html
   <!DOCTYPE html>
   <html>
-    <head>
+  <head>
       <!-- ... -->
-    </head>
-    <body>
+  </head>
+  <body>
       <!--download 使点击链接直接下载图片，而不是打开图片-->
       <h2><a href="https://picsum.photos/5000/5000/" download>Download Image</a></h2>
       <progress value="0" max="100" id="progress"></progress>
       <script>
-        window.progress = document.getElementById('progress')
+      window.progress = document.getElementById('progress')
       </script>
-    </body>
+  </body>
   </html>
   ```
 
   ```js
-  const {app, BrowserWindow, session} = require('electron')
+  const { app, BrowserWindow, session } = require('electron')
   let mainWindow
-  function createWindow () {
-    let ses = session.defaultSession
-    mainWindow = new BrowserWindow({
-      width: 1000, height: 800,
-      webPreferences: { nodeIntegration: true }
-    })
   
-    // Load index.html into the new BrowserWindow
-    mainWindow.loadFile('index.html')
-  
-    ses.on('will-download', (e, downloadItem, webContents) => {
-  
-      let fileName = downloadItem.getFilename()
-      let fileSize = downloadItem.getTotalBytes()
-  
-      // Save to desktop
-      downloadItem.setSavePath(app.getPath('desktop') + `/${fileName}`)
-  
-      downloadItem.on('updated', (e, state) => {
-  
-        let received = downloadItem.getReceivedBytes()
-  
-        if (state === 'progressing' && received) {
-          let progress = Math.round((received/fileSize)*100)
-          webContents.executeJavaScript(`window.progress.value = ${progress}`)
-        }
+  function createWindow() {
+      let ses = session.defaultSession
+      mainWindow = new BrowserWindow({
+          width: 1000,
+          height: 800,
+          webPreferences: { nodeIntegration: true }
       })
-    })
   
-    // Listen for window being closed
-    mainWindow.on('closed',  () => {
-      mainWindow = null
-    })
+      // Load index.html into the new BrowserWindow
+      mainWindow.loadFile('index.html')
+  
+      ses.on('will-download', (e, downloadItem, webContents) => {
+  
+          let fileName = downloadItem.getFilename()
+          let fileSize = downloadItem.getTotalBytes()
+  
+          // Save to desktop
+          downloadItem.setSavePath(app.getPath('desktop') + `/${fileName}`)
+  
+          downloadItem.on('updated', (e, state) => {
+  
+              let received = downloadItem.getReceivedBytes()
+  
+              if (state === 'progressing' && received) {
+                  let progress = Math.round((received / fileSize) * 100)
+                  webContents.executeJavaScript(`window.progress.value = ${progress}`)
+              }
+          })
+      })
+  
+      // Listen for window being closed
+      mainWindow.on('closed', () => {
+          mainWindow = null
+      })
   }
   
   //...
@@ -770,26 +786,27 @@ function createWindow() {
 #### [accelerator](https://electronjs.org/docs/api/accelerator) & [globalShortcut](https://electronjs.org/docs/api/global-shortcut)
 
 ```js
-
-const {app, BrowserWindow, globalShortcut} = require('electron')
+const { app, BrowserWindow, globalShortcut } = require('electron')
 let mainWindow
-function createWindow () {
-  mainWindow = new BrowserWindow({
-    width: 1000, height: 800,
-    webPreferences: { nodeIntegration: true }
-  })
-  mainWindow.loadFile('index.html')
 
-  // 快捷键，不论窗口是否获得焦点都有效，也可能会与其他应用冲突
-  globalShortcut.register('CommandOrControl+G', () => { 
-    console.log('User pressed G with a combination key')
-    globalShortcut.unregister('CommandOrControl+G')
-  })
+function createWindow() {
+    mainWindow = new BrowserWindow({
+        width: 1000,
+        height: 800,
+        webPreferences: { nodeIntegration: true }
+    })
+    mainWindow.loadFile('index.html')
 
-  // Listen for window being closed
-  mainWindow.on('closed',  () => {
-    mainWindow = null
-  })
+    // 快捷键，不论窗口是否获得焦点都有效，也可能会与其他应用冲突
+    globalShortcut.register('CommandOrControl+G', () => {
+        console.log('User pressed G with a combination key')
+        globalShortcut.unregister('CommandOrControl+G')
+    })
+
+    // Listen for window being closed
+    mainWindow.on('closed', () => {
+        mainWindow = null
+    })
 }
 
 //...
@@ -807,14 +824,14 @@ function createWindow () {
 #### [Menu](https://electronjs.org/docs/api/menu) & [MenuItem](https://electronjs.org/docs/api/menu-item)
 
 ```js
-const {app, BrowserWindow, Menu, MenuItem} = require('electron')
+const { app, BrowserWindow, Menu, MenuItem } = require('electron')
 let mainWindow
 
 //let mainMenu = new Menu()
 //let menuItem1 = new MenuItem({ 
-//	label: 'Electron',
+//  label: 'Electron',
 //  submenu: [
-//  	{ label: 'Item1' },
+//    { label: 'Item1' },
 //    { label: 'Item2', submenu: [ { label: 'Sub Item 1' } ]}
 //  ]
 //})
@@ -822,72 +839,73 @@ let mainWindow
 
 //let mainMenu = Menu.buildFromTemplate( require('./mainMenu') )
 
-let mainMenu = Menu.buildFromTemplate([
-  { 
-    label: 'Electron',
-    submenu: [
-      { label: 'Item1' },
-      { label: 'Item2', submenu: [ { label: 'Sub Item 1' } ]}
-    ]
-  },
-  {
-    label: 'Edit',
-    submenu: [
-      { role: 'undo'},
-      { role: 'redo'},
-      { role: 'copy'},
-      { role: 'paste'},
-    ]
-  },
-  // { role: 'editMenu' },
-  {
-    label: 'Actions',
-    submenu: [
-      { label: 'action 1' },
-      { 
-        label: 'action 2', 
-        click: () => { console.log('action 2') },  
-        accelerator: 'Shift+Alt+G' // 快捷键，仅当窗口获得焦点时有效，符合期望
-      },
-      { label: 'action 3', enabled: false }, // 菜单不可点击
-      { label: 'DevTools', role: 'toggleDevTools' }, // 菜单可配置已预定义的功能
-      { role: 'toggleFullScreen' }
-    ]
-  }
+let mainMenu = Menu.buildFromTemplate([{
+        label: 'Electron',
+        submenu: [
+            { label: 'Item1' },
+            { label: 'Item2', submenu: [{ label: 'Sub Item 1' }] }
+        ]
+    },
+    {
+        label: 'Edit',
+        submenu: [
+            { role: 'undo' },
+            { role: 'redo' },
+            { role: 'copy' },
+            { role: 'paste' },
+        ]
+    },
+    // { role: 'editMenu' },
+    {
+        label: 'Actions',
+        submenu: [
+            { label: 'action 1' },
+            {
+                label: 'action 2',
+                click: () => { console.log('action 2') },
+                accelerator: 'Shift+Alt+G' // 快捷键，仅当窗口获得焦点时有效，符合期望
+            },
+            { label: 'action 3', enabled: false }, // 菜单不可点击
+            { label: 'DevTools', role: 'toggleDevTools' }, // 菜单可配置已预定义的功能
+            { role: 'toggleFullScreen' }
+        ]
+    }
 ])
 
-function createWindow () {
-  mainWindow = new BrowserWindow({
-    width: 1000, height: 800,
-    webPreferences: { nodeIntegration: true }
-  })
-  mainWindow.loadFile('index.html')
+function createWindow() {
+    mainWindow = new BrowserWindow({
+        width: 1000,
+        height: 800,
+        webPreferences: { nodeIntegration: true }
+    })
+    mainWindow.loadFile('index.html')
 
-  Menu.setApplicationMenu(mainMenu)
+    Menu.setApplicationMenu(mainMenu)
 
-  mainWindow.on('closed',  () => {
-    mainWindow = null
-  })
+    mainWindow.on('closed', () => {
+        mainWindow = null
+    })
 }
 
 //...
 ```
 
 ```js
-const {app, BrowserWindow, Menu} = require('electron')
+const { app, BrowserWindow, Menu } = require('electron')
 let mainWindow
 let contextMenu = Menu.buildFromTemplate([
-  { label: 'Item 1' },
-  { role: 'editMenu' }
+    { label: 'Item 1' },
+    { role: 'editMenu' }
 ])
-function createWindow () {
-  
-	//...
-  mainWindow.webContents.on('context-menu', e => { // 右键菜单
-    contextMenu.popup()
-  })
-  
-	//...
+
+function createWindow() {
+
+    //...
+    mainWindow.webContents.on('context-menu', e => { // 右键菜单
+        contextMenu.popup()
+    })
+
+    //...
 }
 
 //...
@@ -899,37 +917,38 @@ function createWindow () {
 - https://www.danrodney.com/blog/retina-web-graphics-explained-1x-versus-2x-low-res-versus-hi-res/
 
 ```js
-const {app, BrowserWindow, Tray} = require('electron')
+const { app, BrowserWindow, Tray } = require('electron')
 let mainWindow, tray
 
 let trayMenu = Menu.buildFromTemplate([
-  { label: 'Item 1' },
-  { role: 'quit' }
+    { label: 'Item 1' },
+    { role: 'quit' }
 ])
 
 function createTray() {
-  
-	 // 一个参数：nativeImage 路径; xxxTemplate 表示系统会根据系统主题或状态来调整其颜色
-  tray = new Tray('trayTemplate@2x.png')
-  tray.setToolTip('Tray details')
 
-  tray.on('click', e => {
-    if (e.shiftKey) { // 如果 shift 键被按下
-      app.quit()
-    } else {
-      mainWindow.isVisible() ? mainWindow.hide() : mainWindow.show()
-    }
-  })
+    // 一个参数：nativeImage 路径; xxxTemplate 表示系统会根据系统主题或状态来调整其颜色
+    tray = new Tray('trayTemplate@2x.png')
+    tray.setToolTip('Tray details')
 
-  tray.setContextMenu(trayMenu) // 配置菜单后，👆click 会被忽略
+    tray.on('click', e => {
+        if (e.shiftKey) { // 如果 shift 键被按下
+            app.quit()
+        } else {
+            mainWindow.isVisible() ? mainWindow.hide() : mainWindow.show()
+        }
+    })
+
+    tray.setContextMenu(trayMenu) // 配置菜单后，👆click 会被忽略
 }
-function createWindow () {
-	createTray()
-  mainWindow.webContents.on('context-menu', e => { // 右键菜单
-    contextMenu.popup()
-  })
-  
-	//...
+
+function createWindow() {
+    createTray()
+    mainWindow.webContents.on('context-menu', e => { // 右键菜单
+        contextMenu.popup()
+    })
+
+    //...
 }
 
 //...
@@ -957,17 +976,18 @@ function createWindow () {
 
 ```js
 const electron = require('electron')
-const {app, BrowserWindow} = electron
+const { app, BrowserWindow } = electron
 let mainWindow
-function createWindow () {
-  //...
-  electron.powerMonitor.on('resume', e => {
-    if(!mainWindow) createWindow()
-  })
 
-  electron.powerMonitor.on('suspend', e => {
-    console.log('Saving some data')
-  })
+function createWindow() {
+    //...
+    electron.powerMonitor.on('resume', e => {
+        if (!mainWindow) createWindow()
+    })
+
+    electron.powerMonitor.on('suspend', e => {
+        console.log('Saving some data')
+    })
 }
 
 //...
@@ -983,13 +1003,14 @@ function createWindow () {
 ```js
 // main.js
 const electron = require('electron')
-const {app, BrowserWindow} = electron
+const { app, BrowserWindow } = electron
 
 global['myglob'] = 'A var set in main.js'
 
 let mainWindow
-function createWindow () {
-  //...
+
+function createWindow() {
+    //...
 }
 //...
 ```
@@ -1000,15 +1021,15 @@ const remote = require('electron').remote
 const { app, dialog, BrowserWindow } = remote
 const button = document.getElementById('test-button')
 button.addEventListener('click', e => {
-  // dialog.showMessageBox({ message: 'Dialog invoked from Renderer process' })
-  // let secWin = new BrowserWindow({
-  //   width: 400, height: 350
-  // })
-  // secWin.loadFile('index.html')
-  // console.log( remote.getGlobal('myglob') )
-  // app.quit()
-  let win = remote.getCurrentWindow()
-  win.maximize()
+    // dialog.showMessageBox({ message: 'Dialog invoked from Renderer process' })
+    // let secWin = new BrowserWindow({
+    //   width: 400, height: 350
+    // })
+    // secWin.loadFile('index.html')
+    // console.log( remote.getGlobal('myglob') )
+    // app.quit()
+    let win = remote.getCurrentWindow()
+    win.maximize()
 })
 ```
 
@@ -1032,27 +1053,27 @@ button.addEventListener('click', e => {
 ```html
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <!-- ... -->
-  </head>
-  <body>
+</head>
+<body>
     <h1>Hello World!</h1>
     <h3><a href="#" onclick="newWin()">New Window</a></h3>
     <h3><a href="#" onclick="closeWin()">Close Window</a></h3>
     <h3><a href="#" onclick="styleWin()">Bad Fonts</a></h3>
     <script>
-      let win
-      const newWin = () => {
+    let win
+    const newWin = () => {
         win = window.open('https://electronjs.org', '_blank', 'width=500,height=450,alwaysOnTop=1')
-      }
-      const closeWin = () => {
+    }
+    const closeWin = () => {
         win.close()
-      }
-      const styleWin = () => {
+    }
+    const styleWin = () => {
         win.eval("document.getElementsByTagName('body')[0].style.fontFamily = 'Comic Sans MS'")
-      }
+    }
     </script>
-  </body>
+</body>
 ```
 
 #### [webFrame](https://electronjs.org/docs/api/web-frame#webframe)
@@ -1062,32 +1083,33 @@ button.addEventListener('click', e => {
 ```html
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <!-- ... -->
-  </head>
-  <body>
+</head>
+<body>
     <h1>Hello World!</h1>
     <img src="https://placekitten.com/450/300" alt=""><br>
     <button onclick="zoomUp()">Increase Zoom</button>
     <button onclick="zoomDown()">Decrease Zoom</button>
     <button onclick="zoomReset()">Reset Zoom</button>
     <script>
-      const { webFrame } = require('electron')
-      const zoomUp = () => {
+    const { webFrame } = require('electron')
+    const zoomUp = () => {
         // webFrame.setZoomFactor( webFrame.getZoomFactor() + 1 )
-        webFrame.setZoomLevel( webFrame.getZoomLevel() + 1 )
-      }
-      const zoomDown = () => {
+        webFrame.setZoomLevel(webFrame.getZoomLevel() + 1)
+    }
+    const zoomDown = () => {
         // webFrame.setZoomFactor( webFrame.getZoomFactor() - 1 )
-        webFrame.setZoomLevel( webFrame.getZoomLevel() - 1 )
-      }
-      const zoomReset = () => {
+        webFrame.setZoomLevel(webFrame.getZoomLevel() - 1)
+    }
+    const zoomReset = () => {
         // webFrame.setZoomFactor( 1 )
-        webFrame.setZoomLevel( 1 )
-      }
-      console.log( webFrame.getResourceUsage() )
+        webFrame.setZoomLevel(1)
+    }
+    console.log(webFrame.getResourceUsage())
     </script>
-  </body>
+</body>
+
 </html>
 ```
 
@@ -1117,33 +1139,32 @@ button.addEventListener('click', e => {
 ```html
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <!-- ... -->
-  </head>
-  <body>
+</head>
+<body>
     <h1>Hello World!</h1>
-
     <img width="100%" src="" id="screenshot"><br>
     <button id="screenshot-button">Get Screenshot</button>
-
     <script>
-      require('./renderer.js')
+    require('./renderer.js')
     </script>
-  </body>
+</body>
+
 </html>
 ```
 
 ```js
 // renderer.js
-const { desktopCapturer } =require('electron')
+const { desktopCapturer } = require('electron')
 
 document.getElementById('screenshot-button').addEventListener('click', () => {
-  
-  desktopCapturer.getSources({ types:['window'], thumbnailSize: {width:1920, height:1080} }, (error, sources) => {
-    console.log(sources)
-    document.getElementById('screenshot').src = sources[0].thumbnail.toDataURL()
-  })
-  
+
+    desktopCapturer.getSources({ types: ['window'], thumbnailSize: { width: 1920, height: 1080 } }, (error, sources) => {
+        console.log(sources)
+        document.getElementById('screenshot').src = sources[0].thumbnail.toDataURL()
+    })
+
 })
 ```
 
@@ -1164,11 +1185,11 @@ document.getElementById('screenshot-button').addEventListener('click', () => {
 
 ```js
 //main.js
-const {app, BrowserWindow, ipcMain} = require('electron')
+const { app, BrowserWindow, ipcMain } = require('electron')
 // ...
-ipcMain.on( 'channel1', (e, args) => {
-  console.log(args)
-  e.sender.send( 'channel1-response', 'Message received on "channel1". Thank you!')
+ipcMain.on('channel1', (e, args) => {
+    console.log(args)
+    e.sender.send('channel1-response', 'Message received on "channel1". Thank you!')
 })
 
 //...
@@ -1179,29 +1200,29 @@ ipcMain.on( 'channel1', (e, args) => {
 const { ipcRenderer } = require('electron')
 //...
 document.getElementById('talk').addEventListener('click', e => {
-  ipcRenderer.send( 'channel1', 'Hello from main window')
+    ipcRenderer.send('channel1', 'Hello from main window')
 })
-ipcRenderer.on( 'channel1-response', (e, args) => {
-  console.log(args)
+ipcRenderer.on('channel1-response', (e, args) => {
+    console.log(args)
 })
 //...
 ```
 
 ```js
 //main.js
-const {app, BrowserWindow, ipcMain} = require('electron')
+const { app, BrowserWindow, ipcMain } = require('electron')
 //...
-function createWindow () {
-  //...
-	mainWindow.webContents.on( 'did-finish-load', e => {
-    mainWindow.webContents.send( 'mailbox', {
-      from: 'docoder',
-      email: 'docoder@163.com',
-      priority: 1
+function createWindow() {
+    //...
+    mainWindow.webContents.on('did-finish-load', e => {
+        mainWindow.webContents.send('mailbox', {
+            from: 'docoder',
+            email: 'docoder@163.com',
+            priority: 1
+        })
     })
-  })
-  
-  //...
+
+    //...
 }
 
 //...
@@ -1210,26 +1231,26 @@ function createWindow () {
 ```js
 //renderer.js
 //...
-ipcRenderer.on( 'mailbox', (e, args) => {
-  console.log(args)
+ipcRenderer.on('mailbox', (e, args) => {
+    console.log(args)
 })
-//...
+//..
 ```
 
 #### Synchronous
 
 ```js
 //main.js
-const {app, BrowserWindow, ipcMain} = require('electron')
+const { app, BrowserWindow, ipcMain } = require('electron')
 //...
-ipcMain.on( 'sync-message', (e, args) => {
-  console.log(args)
-  setTimeout( () => {
-    e.returnValue = 'A sync response from the main process'
-  }, 4000)
+ipcMain.on('sync-message', (e, args) => {
+    console.log(args)
+    setTimeout(() => {
+        e.returnValue = 'A sync response from the main process'
+    }, 4000)
 
 })
-//...
+//....
 ```
 
 ```js
@@ -1237,8 +1258,8 @@ ipcMain.on( 'sync-message', (e, args) => {
 const { ipcRenderer } = require('electron')
 //...
 document.getElementById('talk').addEventListener('click', e => {
-  let response = ipcRenderer.sendSync( 'sync-message', 'Waiting for response')
-  console.log(response)
+    let response = ipcRenderer.sendSync('sync-message', 'Waiting for response')
+    console.log(response)
 })
 //...
 ```
@@ -1273,25 +1294,26 @@ document.getElementById('talk').addEventListener('click', e => {
   ```html
   <!DOCTYPE html>
   <html>
-    <head>
+  <head>
       <!-- ... -->
-    </head>
-    <body>
+  </head>
+  <body>
       <!-- ... -->
       <br><button type="button" onclick="process.hang()">Hang Renderer</button>
       <br><button type="button" onclick="process.crash()">Crash Renderer</button>
-  		<!-- ... -->
-    </body>
+      <!-- ... -->
+  </body>
   </html>
   ```
 
   ```js
-  const {app, BrowserWindow} = require('electron')
+  const { app, BrowserWindow } = require('electron')
   let mainWindow
-  function createWindow () {
-    //...
-    mainWindow.webContents.on( 'crashed', mainWindow.reload )
-  	//...
+  
+  function createWindow() {
+      //...
+      mainWindow.webContents.on('crashed', mainWindow.reload)
+      //...
   }
   //...
   ```
@@ -1315,35 +1337,38 @@ const electron = require('electron')
 const displays = electron.screen.getAllDisplays()
 
 //第一个显示器（主显示器）
-console.log( `${displays[0].size.width} x ${displays[0].size.height}` )
-console.log( `${displays[0].bounds.x}, ${displays[0].bounds.y}` ) // 0, 0
+console.log(`${displays[0].size.width} x ${displays[0].size.height}`)
+console.log(`${displays[0].bounds.x}, ${displays[0].bounds.y}`) // 0, 0
 //第二个显示器（扩展显示器）
-console.log( `${displays[1].size.width} x ${displays[1].size.height}` )
-console.log( `${displays[1].bounds.x}, ${displays[1].bounds.y}` ) // 相对于主显示器排列的坐标
+console.log(`${displays[1].size.width} x ${displays[1].size.height}`)
+console.log(`${displays[1].bounds.x}, ${displays[1].bounds.y}`) // 相对于主显示器排列的坐标
 
 // 显示器排列改变的事件
-electron.screen.on( 'display-metrics-changed', (e, display, metricsChanged) => {
-  console.log( metricsChanged )
+electron.screen.on('display-metrics-changed', (e, display, metricsChanged) => {
+    console.log(metricsChanged)
 })
 
-document.getElementsByTagName('body')[0].addEventListener( 'click', e => {
-  console.log( electron.screen.getCursorScreenPoint() )
+document.getElementsByTagName('body')[0].addEventListener('click', e => {
+    console.log(electron.screen.getCursorScreenPoint())
 })
 ```
 
 ```js
 // main.js
 const electron = require('electron')
-const {app, BrowserWindow} = electron
+const { app, BrowserWindow } = electron
 let mainWindow
-function createWindow () {
-  let primaryDisplay = electron.screen.getPrimaryDisplay()
-  mainWindow = new BrowserWindow({
-    x: primaryDisplay.bounds.x, y: primaryDisplay.bounds.y,
-    width: primaryDisplay.size.width/2, height: primaryDisplay.size.height,
-    webPreferences: { nodeIntegration: true }
-  })
-	//...
+
+function createWindow() {
+    let primaryDisplay = electron.screen.getPrimaryDisplay()
+    mainWindow = new BrowserWindow({
+        x: primaryDisplay.bounds.x,
+        y: primaryDisplay.bounds.y,
+        width: primaryDisplay.size.width / 2,
+        height: primaryDisplay.size.height,
+        webPreferences: { nodeIntegration: true }
+    })
+    //...
 }
 //...
 ```
@@ -1360,32 +1385,32 @@ function createWindow () {
 ```html
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <!-- ... -->
-  </head>
-  <body>
+</head>
+<body>
     <!-- ... -->
     <button onclick="showSite()">Launch Electron.js Site</button><br>
     <button onclick="openSplash()">Open Splash.png</button><br>
     <button onclick="showSplashFile()">Show Splash.png</button><br>
     <button onclick="deleteSplashFile()">Delete Splash.png</button><br>
     <script>
-      const { shell } = require('electron')
-      const showSite = e => {
+    const { shell } = require('electron')
+    const showSite = e => {
         shell.openExternal('https://electronjs.org')
-      }
-      const splashPath = `${__dirname}/splash.png`
-      const openSplash = e => {
+    }
+    const splashPath = `${__dirname}/splash.png`
+    const openSplash = e => {
         shell.openItem(splashPath)
-      }
-      const showSplashFile = e => {
+    }
+    const showSplashFile = e => {
         shell.showItemInFolder(splashPath)
-      }
-      const deleteSplashFile = e => {
+    }
+    const deleteSplashFile = e => {
         shell.moveItemToTrash(splashPath)
-      }
+    }
     </script>
-  </body>
+</body>
 </html>
 ```
 
@@ -1403,38 +1428,38 @@ function createWindow () {
 ```html
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <!-- ... -->
-  </head>
-  <body>
+</head>
+<body>
     <h1>Convert splash.png:</h1>
     <button onclick="toPng()">PNG</button>
     <button onclick="toJpg()">JPG</button>
     <button onclick="toTag()">Show</button>
     <br><img src="" id="preview">
     <script>
-      const fs = require('fs')
-      const { nativeImage, remote } = require('electron')
-      const splash = nativeImage.createFromPath(`${__dirname}/splash.png`)
-      const saveToDesktop = (data, ext) => {
+    const fs = require('fs')
+    const { nativeImage, remote } = require('electron')
+    const splash = nativeImage.createFromPath(`${__dirname}/splash.png`)
+    const saveToDesktop = (data, ext) => {
         let desktopPath = remote.app.getPath('desktop')
-        fs.writeFile( `${desktopPath}/splash.${ext}`, data, console.log )
-      }
-      const toTag = e => {
+        fs.writeFile(`${desktopPath}/splash.${ext}`, data, console.log)
+    }
+    const toTag = e => {
         let size = splash.getSize()
-        let splashURL = splash.resize({ width: size.width/4, height: size.height/4 }).toDataURL()
+        let splashURL = splash.resize({ width: size.width / 4, height: size.height / 4 }).toDataURL()
         document.getElementById('preview').src = splashURL
-      }
-      const toPng = e => {
+    }
+    const toPng = e => {
         let pngSplash = splash.toPNG()
-        saveToDesktop( pngSplash, 'png' )
-      }
-      const toJpg = e => {
+        saveToDesktop(pngSplash, 'png')
+    }
+    const toJpg = e => {
         let jpgSplash = splash.toJPEG(100)
-        saveToDesktop( jpgSplash, 'jpg' )
-      }
+        saveToDesktop(jpgSplash, 'jpg')
+    }
     </script>
-  </body>
+</body>
 </html>
 ```
 
@@ -1452,27 +1477,27 @@ function createWindow () {
 ```html
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <!-- ... -->
-  </head>
-  <body>
-  	<!-- ... -->
+</head>
+<body>
+    <!-- ... -->
     <br><button onclick="makeUpper()">Make clipboard uppercase</button>
     <br><button onclick="showImage()">Show clipboard image</button>
     <br><img src="" id="cbImage">
     <script>
-      const { clipboard } = require('electron')
-      console.log( clipboard.readText() )
-      const showImage = e => {
+    const { clipboard } = require('electron')
+    console.log(clipboard.readText())
+    const showImage = e => {
         let image = clipboard.readImage()
         document.getElementById('cbImage').src = image.toDataURL()
-      }
-      const makeUpper = e => {
+    }
+    const makeUpper = e => {
         let cbText = clipboard.readText()
-        clipboard.writeText( cbText.toUpperCase() )
-      }
+        clipboard.writeText(cbText.toUpperCase())
+    }
     </script>
-  </body>
+</body>
 </html>
 ```
 
@@ -1485,39 +1510,40 @@ function createWindow () {
 - render animation, 尤其，3d css animation, 用 GPU, 否则用 CPU 会更快
 
 ```js
-const {app, BrowserWindow} = require('electron')
+const { app, BrowserWindow } = require('electron')
 const fs = require('fs')
 let mainWindow
 
 app.disableHardwareAcceleration() // 改为 CPU
 
-function createWindow () {
+function createWindow() {
 
-  mainWindow = new BrowserWindow({
-    width: 1000, height: 800,
-    show: false,
-    webPreferences: {
-      nodeIntegration: true,
-      offscreen: true
-    }
-  })
+    mainWindow = new BrowserWindow({
+        width: 1000,
+        height: 800,
+        show: false,
+        webPreferences: {
+            nodeIntegration: true,
+            offscreen: true
+        }
+    })
 
-  mainWindow.loadURL('https://electronjs.org')
+    mainWindow.loadURL('https://electronjs.org')
 
-  let i = 1
-  mainWindow.webContents.on('paint', (e, dirty, image) => {
-    let screenshot = image.toPNG()
-    fs.writeFile( app.getPath('desktop') + `/screenshot_${i}.png`, screenshot, console.log )
-    i++
-  })
+    let i = 1
+    mainWindow.webContents.on('paint', (e, dirty, image) => {
+        let screenshot = image.toPNG()
+        fs.writeFile(app.getPath('desktop') + `/screenshot_${i}.png`, screenshot, console.log)
+        i++
+    })
 
-  mainWindow.webContents.on('did-finish-load', e => {
-    console.log( mainWindow.getTitle() )
-    mainWindow.close()
-    mainWindow = null
-  })
-  
-	//...
+    mainWindow.webContents.on('did-finish-load', e => {
+        console.log(mainWindow.getTitle())
+        mainWindow.close()
+        mainWindow = null
+    })
+
+    //...
 }
 
 //...
@@ -1531,25 +1557,25 @@ function createWindow () {
 ```html
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <!-- ... -->
-  </head>
-  <body>
+</head>
+<body>
     <h1>App is: <u id="status"></u></h1>
     <script>
-      const setStatus = status => {
+    const setStatus = status => {
         const statusNode = document.getElementById('status')
         statusNode.innerText = status ? 'online' : 'offline'
-      }
-      setStatus( navigator.onLine )
-      window.addEventListener('online', e => {
+    }
+    setStatus(navigator.onLine)
+    window.addEventListener('online', e => {
         setStatus(true)
-      })
-      window.addEventListener('offline', e => {
+    })
+    window.addEventListener('offline', e => {
         setStatus(false)
-      })
+    })
     </script>
-  </body>
+</body>
 </html>
 ```
 
@@ -1565,12 +1591,12 @@ function createWindow () {
 const { remote } = require('electron')
 const self = remote.getCurrentWindow()
 setTimeout(() => {
-  let notification = new Notification( 'Electron App', {
-    body: 'Some notification info!'
-  })
-  notification.onclick = e => {
-    if( ! self.isVisible() ) self.show()
-  }
+    let notification = new Notification('Electron App', {
+        body: 'Some notification info!'
+    })
+    notification.onclick = e => {
+        if (!self.isVisible()) self.show()
+    }
 }, 2000)
 ```
 
@@ -1585,20 +1611,22 @@ setTimeout(() => {
 
 ```js
 // main.js
-const {app, BrowserWindow} = require('electron')
+const { app, BrowserWindow } = require('electron')
 let mainWindow
-function createWindow () {
-  mainWindow = new BrowserWindow({
-    width: 1000, height: 800,
-    webPreferences: {
-      nodeIntegration: false, // 将 nodeIntegration 置为 false
-      contextIsolation: false, // 使 preload.js 可以访问 windows context
-      preload: __dirname + '/preload.js' // 使用预加载 js 脚本
-    }
-  })
-  mainWindow.loadURL('https://github.com')
-  
-	//...
+
+function createWindow() {
+    mainWindow = new BrowserWindow({
+        width: 1000,
+        height: 800,
+        webPreferences: {
+            nodeIntegration: false, // 将 nodeIntegration 置为 false
+            contextIsolation: false, // 使 preload.js 可以访问 windows context
+            preload: __dirname + '/preload.js' // 使用预加载 js 脚本
+        }
+    })
+    mainWindow.loadURL('https://github.com')
+
+    //...
 }
 
 //...
@@ -1613,34 +1641,42 @@ const fs = require('fs')
 const desktopPath = remote.app.getPath('desktop')
 
 window.writeToFile = text => {
-  fs.writeFile( desktopPath + '/app.txt', text, console.log )
+    fs.writeFile(desktopPath + '/app.txt', text, console.log)
 }
 
 window.versions = {
-  node: process.versions.node,
-  electron: process.versions.electron
+    node: process.versions.node,
+    electron: process.versions.electron
 }
 ```
 
 ```html
 <!DOCTYPE html>
 <html>
-  <head>
-   	<!-- ... -->
-  </head>
-  <body>
+<head>
     <!-- ... -->
-    We are using Node.js <strong><script>document.write( versions.node)</script></strong>,
-    and Electron <strong><script>document.write( versions.electron )</script></strong>.
+</head>
+<body>
+    <!-- ... -->
+    We are using Node.js <strong>
+        <script>
+        document.write(versions.node)
+        </script>
+    </strong>,
+    and Electron <strong>
+        <script>
+        document.write(versions.electron)
+        </script>
+    </strong>.
     <br><textarea id="content" rows="8" cols="80"></textarea>
     <br><button id="save" onclick="saveText()">Save Content</button>
     <script>
-      const saveText = e => {
+    const saveText = e => {
         const text = document.getElementById('content').value
-        writeToFile( text )
-      }
+        writeToFile(text)
+    }
     </script>
-  </body>
+</body>
 </html>
 ```
 
@@ -1654,17 +1690,16 @@ const { remote } = require('electron')
 const self = remote.getCurrentWindow()
 let progress = 0.01
 let progressInterval = setInterval(() => {
-  
-  self.setProgressBar(progress)
-  
-  if (progress <= 1) {
-    progress += 0.01
-  } else {
-    self.setProgressBar(-1)
-    clearInterval(progressInterval)
-  }
-}, 75)
 
+    self.setProgressBar(progress)
+
+    if (progress <= 1) {
+        progress += 0.01
+    } else {
+        self.setProgressBar(-1)
+        clearInterval(progressInterval)
+    }
+}, 75)
 ```
 
 ## Electron & React
@@ -1743,13 +1778,14 @@ const BrowserWindow = electron.BrowserWindow;
 let mainWindow;
 
 function createWindow() {
-	//...
-	mainWindow.loadURL(
-		isDev
-			? "http://localhost:3000?Page1" // Page1页面
-			: `file://${path.join(__dirname, "../build/index.html?Page1")}` // Page1页面
-	);
-	//...
+    //...
+    mainWindow.loadURL(
+        isDev ?
+        "http://localhost:3000?Page1" // Page1页面
+        :
+        `file://${path.join(__dirname, "../build/index.html?Page1")}` // Page1页面
+    );
+    //...
 }
 //...
 ```
