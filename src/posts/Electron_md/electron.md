@@ -270,9 +270,7 @@ date: "2019-11-25"
 
   ```js
   const { app, BrowserWindow } = require('electron')
-  
   function createWindow() {
-  
       mainWindow = new BrowserWindow({
           width: 1000,
           height: 800,
@@ -332,11 +330,10 @@ date: "2019-11-25"
       mainWindow.on('closed', () => {
           mainWindow = null
       })
-  
   }
   //...
   ```
-
+  
 - Instance Methods
 
   - contents.loadURL(url[, options])
@@ -839,7 +836,8 @@ let mainWindow
 
 //let mainMenu = Menu.buildFromTemplate( require('./mainMenu') )
 
-let mainMenu = Menu.buildFromTemplate([{
+let mainMenu = Menu.buildFromTemplate([
+  	{
         label: 'Electron',
         submenu: [
             { label: 'Item1' },
@@ -1706,7 +1704,7 @@ let progressInterval = setInterval(() => {
 
 ### Init & Install
 
-```shell
+```bash
 # create-react-app
 npx create-react-app my-app
 
