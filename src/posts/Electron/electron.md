@@ -1831,3 +1831,51 @@ import App from './pages';
 ReactDOM.render(<App />, document.getElementById('root'))
 ```
 
+### Fix fs Module not found
+
+**使用 [Rescripts](https://github.com/harrysolovay/rescripts) , 而不 eject CRA**
+
+#### Install Rescripts
+
+```bash
+yarn add @rescripts/cli @rescripts/rescript-env --dev
+```
+
+#### Change package.json
+
+**change**
+
+```json
+"start": "react-scripts start",
+"build": "react-scripts build",
+"test": "react-scripts test",
+```
+
+**to**
+
+```json
+"start": "rescripts start",
+"build": "rescripts build",
+"test": "rescripts test",
+```
+
+#### 添加配置
+
+- 在根目录添加文件 `.rescriptsrc.js`
+
+  ```js
+  module.exports = [require.resolve('./.webpack.config.js')]
+  ```
+
+- 在根目录添加文件 `.webpack.config.js`
+
+  ```js
+  // define child rescript
+  module.exports = config => {
+      config.target = 'electron-renderer';
+      return config;
+  }
+  ```
+
+  
+
