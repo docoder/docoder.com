@@ -1700,6 +1700,20 @@ let progressInterval = setInterval(() => {
 }, 75)
 ```
 
+### Other
+
+#### Using Native Node Modules
+
+```bash
+yarn add electron-rebuild --dev
+
+# Every time you run "npm install", run this:
+./node_modules/.bin/electron-rebuild
+
+# Windows中如果你遇到了问题，请尝试：
+.\node_modules\.bin\electron-rebuild.cmd
+```
+
 ## Electron & React
 
 ### Init & Install
