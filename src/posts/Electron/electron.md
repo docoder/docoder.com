@@ -1714,6 +1714,25 @@ yarn add electron-rebuild --dev
 .\node_modules\.bin\electron-rebuild.cmd
 ```
 
+#### Watch Files and Directories 
+
+**使用 [chokidar library](https://github.com/paulmillr/chokidar)**
+
+fs.watch 和 fs.watchFile 的缺点：
+
+- Node.js `fs.watch`:
+  - Doesn't report filenames on OS X.
+  - Doesn't report events at all when using editors like Sublime on OS X.
+  - Often reports events twice.
+  - Emits most changes as `rename`.
+  - Has [a lot of other issues](https://github.com/joyent/node/search?q=fs.watch&type=Issues).
+  - Does not provide an easy way to recursively watch file trees.
+
+- Node.js `fs.watchFile`:
+  - Almost as bad at event handling.
+  - Also does not provide any recursive watching.
+  - Results in high CPU utilization.
+
 ## Electron & React
 
 ### Init & Install
