@@ -1716,7 +1716,7 @@ yarn add electron-rebuild --dev
 
 #### Watch Files and Directories 
 
-**使用 [chokidar library](https://github.com/paulmillr/chokidar)**
+**使用 [nsfw](https://github.com/Axosoft/nsfw) 或 [chokidar](https://github.com/paulmillr/chokidar)**
 
 fs.watch 和 fs.watchFile 的缺点：
 
