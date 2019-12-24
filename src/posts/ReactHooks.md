@@ -5,7 +5,7 @@ date: "2019-05-09"
 
 ## Introduce
 
-###Example
+### Example
 
 ```jsx
   function Example() {
@@ -24,7 +24,7 @@ date: "2019-05-09"
   }
 ```
 
-###Notes
+### Notes
 
  - React 16.8
 
@@ -50,13 +50,13 @@ date: "2019-05-09"
   - 避免了 Class 的开销
   - 重用逻辑无需高阶组件，减少层级
 
-####逻辑重用
+#### 逻辑重用
 
 - ~~render props~~
 - ~~高阶组件~~
 - 重构，抽取通用逻辑，不用重写层级结构
 
-####拥抱 function, 无 Class
+#### 拥抱 function, 无 Class
 
 - class 缺陷
 - this
@@ -67,7 +67,7 @@ date: "2019-05-09"
 - **Thinking in Hooks**
 - 不能在 Class 中使用
 
-####创建自己的 Hooks
+#### 创建自己的 Hooks
 
 - 每一次调用都会得到一个完全孤立的状态
 - 可以在同一个组件中使用两次相同的自定义 Hook
@@ -76,12 +76,12 @@ date: "2019-05-09"
     - 只用于 linter plugin
     - react 并没有依赖此来搜索 hook 或完成其他功能特性 
 
-####根据代码作用进行拆分
+#### 根据代码作用进行拆分
 
 - 多次使用
 - 粒度更小
 
-####只能在**顶层**调用
+#### 只能在**顶层**调用
 
 - 不能在循环，条件语句，嵌套函数中调用
 
@@ -117,19 +117,19 @@ date: "2019-05-09"
 
 - linter plugin 会进行验证
 
-####只能在 React functions 中调用
+#### 只能在 React functions 中调用
 
 - 不能在普通的 JavaScript 函数中调用
 
 -  React 的函数式组件
 -  自定义的 Hook 
 
-####linter plugin
+#### linter plugin
 
 - [`eslint-plugin-react-hooks`](https://www.npmjs.com/package/eslint-plugin-react-hooks)
 - Create React App 
 
-####shouldComponentUpdate
+#### shouldComponentUpdate
 
 - React .memo wrap 一个 function component 会浅比较 props
 
@@ -145,7 +145,7 @@ date: "2019-05-09"
 
 - useMemo
 
-####getDerivedStateFromProps
+#### getDerivedStateFromProps
 
 ```js
   function ScrollView({row}) {
@@ -164,13 +164,13 @@ date: "2019-05-09"
 
 ## Hooks
 
-###useState
+### useState
 
 ```js
   const [state, setState] = useState(initialState);
 ```
 
-####使用
+#### 使用
 
 - 多个State，多次使用useState
 
@@ -210,7 +210,7 @@ date: "2019-05-09"
 
   - 未来，React也会移除 useEffect 和 useCallback 的依赖列表，因为这完全可以通过算法自动解决
 
-####更新
+#### 更新
 
 - 函数式更新 (Functional updates)
 
@@ -252,7 +252,7 @@ date: "2019-05-09"
         }
       ```
 
-####懒初始化
+#### 懒初始化
 
   - useState 接受一个函数，返回 initialState，仅当初始 render 时被调用进行初始化，只调用一次
 
@@ -263,7 +263,7 @@ date: "2019-05-09"
       });
     ```
 
-###useEffect
+### useEffect
 
 ```js
   useEffect(
@@ -278,7 +278,7 @@ date: "2019-05-09"
   );
 ```
 
-####不同
+#### 不同
 
   - 将类组件中的 `componentDidMount` ，`componentDidUpdate`和 `componentWillUnmount` 统一为一个 API
 - 避免逻辑分散和重复书写
@@ -292,7 +292,7 @@ date: "2019-05-09"
       - 不用担心 effect 里 state 过期的问题
   - 拥抱闭包，在函数作用域中，可方便访问 state
 
-####清理
+#### 清理
 
   - 通过返回一个函数来 clean up
 
@@ -353,7 +353,7 @@ date: "2019-05-09"
     
     ```
 
-####有选择的运行 effect
+#### 有选择的运行 effect
 
 - 避免性能问题
 
@@ -378,7 +378,7 @@ date: "2019-05-09"
 
 - 错误的指定第二个参数(经常是指过少配置), 会造成得不到最新的 props 或 state 的 bug
 
-####需把函数放到 useEffect 里
+#### 需把函数放到 useEffect 里
 
 ```jsx
   function Example({ someProp }) {
@@ -414,7 +414,7 @@ date: "2019-05-09"
   }
 ```
 
-####不能将函数放到 effect 里
+#### 不能将函数放到 effect 里
 
 - 确保函数中没有引用 props 或 state
 
@@ -440,7 +440,7 @@ date: "2019-05-09"
     }
   ```
 
-####effect 依赖变动太频繁
+#### effect 依赖变动太频繁
 
 - 函数式更新 (Functional updates)
 
@@ -474,7 +474,7 @@ date: "2019-05-09"
   }
 ```
 
-####[使用 useReducer 简化 state 管理](https://adamrackis.dev/state-and-use-reducer/)
+#### [使用 useReducer 简化 state 管理](https://adamrackis.dev/state-and-use-reducer/)
 
 ```jsx
   const BookEntryList = props => {
@@ -613,13 +613,13 @@ date: "2019-05-09"
 
 - 根据代码的作用拆分成多个 effect
 
-####不会阻塞浏览器渲染
+#### 不会阻塞浏览器渲染
 
 - useEffect 不会阻塞浏览器渲染
 - `componentDidMount` 或`componentDidUpdate ` 会阻塞
 - 提供阻塞版本 useLayoutEffect ，来满足同步调用计算元素尺寸等问题
 
-###useReducer
+### useReducer
 
 - 只是对 local state 进行 redux 化，没有形成 store 和 公用的 state 树
 
@@ -706,18 +706,18 @@ export const types = {
 export const Store = React.createContext(initialState)
 export function StoreProvider({ children }) {
     const [state, dispatch] = React.useReducer(reducer, initialState)
-    const actions = {
+    const actions = useMemo(() => ({
         submitForm: (values) => {
             dispatch({type: types.FORM_SUBMIT, payload: values})
         }
-    }
+    }), [])
     return <Store.Provider value={{ state, actions }}>{children}</Store.Provider>
 }
 ```
 
-###useRef
+### useRef
 
-####类似实例变量
+#### 类似实例变量
 
 ```jsx
   function Timer() {
@@ -741,7 +741,7 @@ export function StoreProvider({ children }) {
   }
 ```
 
-####获取 previous state
+#### 获取 previous state
 
 ```jsx
   function Counter() {
@@ -756,7 +756,7 @@ export function StoreProvider({ children }) {
   }
 ```
 
-####usePrevious
+#### usePrevious
 
 - 自定义 Hook
 
@@ -778,7 +778,7 @@ export function StoreProvider({ children }) {
   }
 ```
 
-####读取最新 state 
+#### 读取最新 state 
 
 - 在一些异步回调中，读取最新 state 
 
@@ -836,7 +836,7 @@ export function StoreProvider({ children }) {
   }
 ```
 
-####懒加载
+#### 懒加载
 
 - useRef 不像 useState 那样接收函数
 
@@ -868,8 +868,7 @@ export function StoreProvider({ children }) {
     }
     ```
 
-
-###useCallback(fn, deps)
+### useCallback(fn, deps)
 
 - 返回一个带缓存的 callback
 
@@ -924,8 +923,7 @@ export function StoreProvider({ children }) {
     }
   ```
 
-
-###useMemo(() => fn, deps)
+### useMemo(() => fn, deps)
 
 - 返回一个带缓存的值，避免消耗性能的计算重复执行
 
@@ -953,8 +951,54 @@ export function StoreProvider({ children }) {
     }
   ```
 
+- **keeping variables in-sync**
 
-###useImperativeHandle(ref, createHandle, [deps])
+  ```jsx
+  const Chart = ({ dateRange }) => {
+    const [data, setData] = useState()
+    useEffect(() => {
+      const newData = getDataWithinRange(dateRange)
+      setData(newData)
+    }, [dateRange]) // 当 dateRange 改变时，需要重新计算 data
+    return (
+      <svg className="Chart" />
+    )
+  }
+  ```
+
+  可使用 `useMemo` :
+
+  ```jsx
+  const Chart = ({ dateRange }) => {
+    const data = useMemo(() => (
+      getDataWithinRange(dateRange)
+    ), [dateRange]) // 当 dateRange 改变时，需要重新计算 data
+    return (
+      <svg className="Chart" />
+    )
+  }
+  ```
+
+  ```jsx
+  const Chart = ({ dateRange, margins }) => {
+    const data = useMemo(() => (
+      getDataWithinRange(dateRange)
+    ), [dateRange]) // 当 dateRange 改变时，需要重新计算 data
+    
+    // 当 margins 改变时，需要重新计算 dimensions
+    const dimensions = useMemo(getDimensions, [margins])
+    // 当 data 或 dimensions 改变时，需要重新计算 scals
+    const xScale = useMemo(getXScale, [data, dimensions]) 
+    const yScale = useMemo(getYScale, [data, dimensions])
+    return (
+      <svg className="Chart" />
+    )
+  }
+  ```
+
+  
+
+### useImperativeHandle(ref, createHandle, [deps])
 
 - 当使用 ref 来给父组件提供实例时，用来提供自定义的方法属性
 
@@ -989,3 +1033,236 @@ export function StoreProvider({ children }) {
     }
 
   ```
+
+## Custom Hooks
+
+### useIsMounted
+
+```js
+export const useIsMounted = () => {
+  const isMounted = useRef(false)
+  useEffect(() => {
+      isMounted.current = true
+      return () => isMounted.current = false
+  }, [])
+  return isMounted
+}
+```
+
+### useIsInView
+
+```js
+const useIsInView = (margin="0px") => {
+  const [isIntersecting, setIntersecting] = useState(false)
+  const ref = useRef()
+  useEffect(() => {
+    const observer = new IntersectionObserver(([ entry ]) => {
+      setIntersecting(entry.isIntersecting)
+    }, { rootMargin: margin })
+    if (ref.current) observer.observe(ref.current)
+    return () => {
+      observer.unobserve(ref.current)
+    }
+  }, [])
+  return [ref, isIntersecting]
+}
+```
+
+### useHash
+
+```js
+const useHash = (initialValue=null) => {
+  const [storedValue, setStoredValue] = useState(() => {
+    try {
+      const item = window.location.hash
+      return item ? item.slice(1) : initialValue
+    } catch (error) {
+      console.log(error)
+      return initialValue
+    }
+  })
+  const setValue = value => {
+    try {
+      setStoredValue(value)
+      history.pushState(null, null, `#${value}`)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  return [storedValue, setValue]
+}
+```
+
+### useOnKeyPress
+
+```js
+const useOnKeyPress = (targetKey, onKeyDown, onKeyUp, isDebugging=false) => {
+  const [isKeyDown, setIsKeyDown] = useState(false)
+  const onKeyDownLocal = useCallback(e => {
+    if (isDebugging) console.log("key down", e.key, e.key != targetKey ? "- isn't triggered" : "- is triggered")
+    if (e.key != targetKey) return
+    setIsKeyDown(true)
+    if (typeof onKeyDown != "function") return
+    onKeyDown(e)
+  })
+  const onKeyUpLocal = useCallback(e => {
+    if (isDebugging) console.log("key up", e.key, e.key != targetKey ? "- isn't triggered" : "- is triggered")
+    if (e.key != targetKey) return
+    setIsKeyDown(false)
+    if (typeof onKeyUp != "function") return
+    onKeyUp(e)
+  })
+  useEffect(() => {
+    addEventListener('keydown', onKeyDownLocal)
+    addEventListener('keyup', onKeyUpLocal)
+    return () => {
+      removeEventListener('keydown', onKeyDownLocal)
+      removeEventListener('keyup', onKeyUpLocal)
+    }
+  }, [])
+  return isKeyDown
+}
+```
+
+### useChartDimensions
+
+```js
+const combineChartDimensions = dimensions => {
+  let parsedDimensions = {
+      marginTop: 40,
+      marginRight: 30,
+      marginBottom: 40,
+      marginLeft: 75,
+      ...dimensions,
+  }
+  return {
+      ...parsedDimensions,
+      boundedHeight: Math.max(parsedDimensions.height - parsedDimensions.marginTop - parsedDimensions.marginBottom, 0),
+      boundedWidth: Math.max(parsedDimensions.width - parsedDimensions.marginLeft - parsedDimensions.marginRight, 0),
+  }
+}
+export const useChartDimensions = passedSettings => {
+  const ref = useRef()
+  const dimensions = combineChartDimensions(passedSettings)
+  const [width, changeWidth] = useState(0)
+  const [height, changeHeight] = useState(0)
+  useEffect(() => {
+    if (dimensions.width && dimensions.height) return
+    const element = ref.current
+    const resizeObserver = new ResizeObserver(entries => {
+      if (!Array.isArray(entries)) return
+      if (!entries.length) return
+      const entry = entries[0]
+      if (width != entry.contentRect.width) changeWidth(entry.contentRect.width)
+      if (height != entry.contentRect.height) changeHeight(entry.contentRect.height)
+    })
+    resizeObserver.observe(element)
+    return () => resizeObserver.unobserve(element)
+  }, [])
+  const newSettings = combineChartDimensions({
+    ...dimensions,
+    width: dimensions.width || width,
+    height: dimensions.height || height,
+  })
+  return [ref, newSettings]
+}
+```
+
+### useCookie
+
+https://github.com/reactivestack/cookies/tree/master/packages/react-cookie/
+
+### useInterval
+
+https://overreacted.io/making-setinterval-declarative-with-react-hooks/
+
+```js
+import React, { useState, useEffect, useRef } from 'react';
+
+function useInterval(callback, delay) {
+  const savedCallback = useRef();
+
+  // Remember the latest callback.
+  useEffect(() => {
+    savedCallback.current = callback;
+  }, [callback]);
+
+  // Set up the interval.
+  useEffect(() => {
+    function tick() {
+      savedCallback.current();
+    }
+    if (delay !== null) {
+      let id = setInterval(tick, delay);
+      return () => clearInterval(id);
+    }
+  }, [delay]);
+}
+```
+
+### useLocalStorage
+
+https://usehooks.com/useLocalStorage/
+
+```jsx
+import { useState } from 'react';
+
+// Usage
+function App() {
+  // Similar to useState but first arg is key to the value in local storage.
+  const [name, setName] = useLocalStorage('name', 'Bob');
+
+  return (
+    <div>
+      <input
+        type="text"
+        placeholder="Enter your name"
+        value={name}
+        onChange={e => setName(e.target.value)}
+      />
+    </div>
+  );
+}
+
+// Hook
+function useLocalStorage(key, initialValue) {
+  // State to store our value
+  // Pass initial state function to useState so logic is only executed once
+  const [storedValue, setStoredValue] = useState(() => {
+    try {
+      // Get from local storage by key
+      const item = window.localStorage.getItem(key);
+      // Parse stored json or if none return initialValue
+      return item ? JSON.parse(item) : initialValue;
+    } catch (error) {
+      // If error also return initialValue
+      console.log(error);
+      return initialValue;
+    }
+  });
+
+  // Return a wrapped version of useState's setter function that ...
+  // ... persists the new value to localStorage.
+  const setValue = value => {
+    try {
+      // Allow value to be a function so we have same API as useState
+      const valueToStore =
+        value instanceof Function ? value(storedValue) : value;
+      // Save state
+      setStoredValue(valueToStore);
+      // Save to local storage
+      window.localStorage.setItem(key, JSON.stringify(valueToStore));
+    } catch (error) {
+      // A more advanced implementation would handle the error case
+      console.log(error);
+    }
+  };
+
+  return [storedValue, setValue];
+}
+```
+
+### use-persisted-state
+
+https://github.com/donavon/use-persisted-state
+
